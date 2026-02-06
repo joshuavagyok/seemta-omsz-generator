@@ -462,6 +462,7 @@
                         <button class="btn-procedure" onclick="generateProcedure('ekg')">EKG készítés</button>
                         <button class="btn-procedure hospital-only" onclick="generateProcedure('rontgen')">Röntgenezés</button>
                         <button class="btn-procedure hospital-only" onclick="generateProcedure('gipszeles')">Gipszelés</button>
+                        <button class="btn-procedure" onclick="generateProcedure('helyszini_gipszeles')">Helyszíni gipszelés</button>
                     </div>
                 </div>
 
@@ -856,9 +857,10 @@
                             { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot", severity: ["sulyos"] },
                             { type: "me", text: "beadja a Morphine-t intravénásan a fájdalom csillapítására", severity: ["sulyos"] },
                             { type: "do", text: "A sérült fájdalma enyhül." },
-                            { type: "me", text: "előkészíti az önkeményedő műanyag pólyát és rögzíti a törést", severity: ["enyhe"] },
-                            { type: "me", text: "előkészíti a kramer sínt és a rugalmas pólyát", severity: ["kozepes", "sulyos"] },
-                            { type: "me", text: "a sínt a végtagra helyezi és rugalmas pólyával rögzíti", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "előkészíti az önkeményedő műanyag pólyát", severity: ["enyhe", "kozepes"] },
+                            { type: "me", text: "körkörösen felviszi a pólyát a sérült végtagra és megformálja", severity: ["enyhe", "kozepes"] },
+                            { type: "me", text: "előkészíti a kramer sínt és a rugalmas pólyát", severity: ["sulyos"] },
+                            { type: "me", text: "a sínt a végtagra helyezi és rugalmas pólyával rögzíti", severity: ["sulyos"] },
                             { type: "do", text: "A végtag rögzített. {hospitalNote}" }
                         ],
                         korhaz: [
@@ -879,7 +881,7 @@
                     },
                     hospitalNotes: {
                         enyhe: "",
-                        kozepes: "Kórházi gipszelés javasolt.",
+                        kozepes: "",
                         sulyos: "Sürgős kórházi ellátás szükséges!"
                     }
                 },
@@ -1095,6 +1097,17 @@
                         { type: "me", text: "megformálja a gipszet a végtag alakjához" },
                         { type: "me", text: "fedő pólyamenettel rögzíti a gipszet" },
                         { type: "do", text: "A gipszelés elkészült, a végtag rögzített." }
+                    ]
+                },
+
+                helyszini_gipszeles: {
+                    name: "Helyszíni gipszelés",
+                    requiresHospital: false,
+                    steps: [
+                        { type: "me", text: "előkészíti az önkeményedő műanyag pólyát" },
+                        { type: "me", text: "körkörösen felviszi a pólyát a sérült végtagra" },
+                        { type: "me", text: "megformálja a pólyát a végtag alakjához" },
+                        { type: "do", text: "A pólya megkeményedik, a végtag rögzített." }
                     ]
                 }
             }
