@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeeMTA V4 OMSZ RP Generátor</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #0f3460;
+            --accent: #e94560;
+            --accent-hover: #ff6b6b;
+            --text-primary: #eee;
+            --text-secondary: #aaa;
+            --border: #333;
+            --success: #4ade80;
+            --warning: #fbbf24;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-option {
+            padding: 10px 20px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-option:hover {
+            border-color: var(--accent);
+        }
+
+        .btn-option.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .btn-generate {
+            width: 100%;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-generate:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .output-header h2 {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .btn-copy-all {
+            padding: 8px 16px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-copy-all:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        #output {
+            min-height: 300px;
+        }
+
+        .generated-line {
+            background: rgba(0,0,0,0.3);
+            border-left: 3px solid var(--accent);
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .generated-line.me-line {
+            border-left-color: #4ade80;
+        }
+
+        .generated-line.do-line {
+            border-left-color: #60a5fa;
+        }
+
+        .line-text {
+            flex: 1;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+
+        .btn-copy {
+            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid var(--text-secondary);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 40px;
+        }
+
+        .btn-copy:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-copy.copied {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .placeholder {
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        .procedures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-procedure {
+            padding: 12px 10px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .btn-procedure:hover {
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        .btn-procedure.hospital-only {
+            border-color: var(--warning);
+        }
+
+        .btn-procedure.hospital-only::after {
+            content: " (kórház)";
+            font-size: 0.7rem;
+            color: var(--warning);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .warning {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .medications-list {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+
+        .medications-list h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .med-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+        }
+
+        .med-name {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .med-info {
+            color: var(--text-secondary);
+        }
+
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsible-header::after {
+            content: "▼";
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .collapsible-header.collapsed::after {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 300px;
+            overflow-y: auto;
+            transition: max-height 0.3s;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SeeMTA V4 OMSZ RP Generátor</h1>
+            <p>Orvosi RP szöveg generátor az ellátási segédlet alapján</p>
+        </header>
+
+        <div class="main-layout">
+            <div class="left-panel">
+                <div class="card">
+                    <h2>Sérülés beállítások</h2>
+
+                    <div class="form-group">
+                        <label>Sérülés típusa</label>
+                        <select id="injuryType">
+                            <option value="">-- Válassz sérülés típust --</option>
+                            <optgroup label="Sebek">
+                                <option value="feluleti_seb">Felületi seb (horzsolás, vágás)</option>
+                                <option value="zuzodas">Zúzódás</option>
+                            </optgroup>
+                            <optgroup label="Izom/Ízület">
+                                <option value="huzodas">Húzódás</option>
+                                <option value="randulas">Rándulás</option>
+                                <option value="ficam">Ficam</option>
+                            </optgroup>
+                            <optgroup label="Vérzések">
+                                <option value="verzes_kapillaris">Kapilláris (hajszáleres) vérzés</option>
+                                <option value="verzes_venas">Vénás (gyűjtőeres) vérzés</option>
+                                <option value="verzes_arterias">Artériás (ütőeres) vérzés</option>
+                            </optgroup>
+                            <optgroup label="Törések">
+                                <option value="tores_zart">Zárt törés</option>
+                                <option value="tores_nyilt">Nyílt törés</option>
+                            </optgroup>
+                            <optgroup label="Trauma">
+                                <option value="lott_serules">Lőtt sérülés / Áthatoló sérülés</option>
+                            </optgroup>
+                            <optgroup label="Kritikus">
+                                <option value="ajulas">Ájulás / Eszméletvesztés</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Súlyosság</label>
+                        <div class="button-group" id="severityGroup">
+                            <button class="btn-option active" data-value="enyhe">Enyhe</button>
+                            <button class="btn-option" data-value="kozepes">Közepes</button>
+                            <button class="btn-option" data-value="sulyos">Súlyos</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Helyszín</label>
+                        <div class="button-group" id="locationGroup">
+                            <button class="btn-option active" data-value="helyszin">Helyszín (Utca)</button>
+                            <button class="btn-option" data-value="korhaz">Kórház</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="bodyPartGroup">
+                        <label>Testrész</label>
+                        <select id="bodyPart">
+                            <option value="">-- Válassz testrészt --</option>
+                            <optgroup label="Felső végtag">
+                                <option value="bal_kar">Bal kar</option>
+                                <option value="jobb_kar">Jobb kar</option>
+                                <option value="bal_kez">Bal kéz</option>
+                                <option value="jobb_kez">Jobb kéz</option>
+                                <option value="bal_vall">Bal váll</option>
+                                <option value="jobb_vall">Jobb váll</option>
+                                <option value="bal_konyok">Bal könyök</option>
+                                <option value="jobb_konyok">Jobb könyök</option>
+                                <option value="bal_csuklo">Bal csukló</option>
+                                <option value="jobb_csuklo">Jobb csukló</option>
+                            </optgroup>
+                            <optgroup label="Alsó végtag">
+                                <option value="bal_lab">Bal láb</option>
+                                <option value="jobb_lab">Jobb láb</option>
+                                <option value="bal_comb">Bal comb</option>
+                                <option value="jobb_comb">Jobb comb</option>
+                                <option value="bal_terd">Bal térd</option>
+                                <option value="jobb_terd">Jobb térd</option>
+                                <option value="bal_boka">Bal boka</option>
+                                <option value="jobb_boka">Jobb boka</option>
+                            </optgroup>
+                            <optgroup label="Törzs">
+                                <option value="mellkas">Mellkas</option>
+                                <option value="has">Has</option>
+                                <option value="hat">Hát</option>
+                            </optgroup>
+                            <optgroup label="Fej">
+                                <option value="fej">Fej</option>
+                                <option value="arc">Arc</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div id="warningBox" class="warning hidden"></div>
+
+                    <button class="btn-generate" onclick="generateRP()">Generálás</button>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h2>Gyors beavatkozások</h2>
+                    <div class="procedures-grid">
+                        <button class="btn-procedure" onclick="generateProcedure('venabiztositas')">Vénabiztosítás</button>
+                        <button class="btn-procedure" onclick="generateProcedure('vernyomas_meres')">Vérnyomás mérés</button>
+                        <button class="btn-procedure" onclick="generateProcedure('pulzoxy_meres')">Pulzoxy mérés</button>
+                        <button class="btn-procedure" onclick="generateProcedure('vercukor_meres')">Vércukor mérés</button>
+                        <button class="btn-procedure" onclick="generateProcedure('ekg')">EKG készítés</button>
+                        <button class="btn-procedure hospital-only" onclick="generateProcedure('rontgen')">Röntgenezés</button>
+                        <button class="btn-procedure hospital-only" onclick="generateProcedure('gipszeles')">Gipszelés</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="medications-list">
+                        <div class="collapsible-header" onclick="toggleMedications()">
+                            <h3>Gyógyszerek referencia</h3>
+                        </div>
+                        <div class="collapsible-content" id="medicationsContent">
+                            <div class="med-item"><span class="med-name">Algopyrin</span><span class="med-info">Fájdalomcsillapító - 500-1500mg</span></div>
+                            <div class="med-item"><span class="med-name">Flector gél</span><span class="med-info">Gyulladáscsökkentő - helyi</span></div>
+                            <div class="med-item"><span class="med-name">Jégzselé</span><span class="med-info">Fájdalomcsillapító, hűsítő</span></div>
+                            <div class="med-item"><span class="med-name">Lidocain</span><span class="med-info">Helyi érzéstelenítő - 1-3ml</span></div>
+                            <div class="med-item"><span class="med-name">Morphine</span><span class="med-info">Kábító fájdalomcsillapító - 5-10mg</span></div>
+                            <div class="med-item"><span class="med-name">Exacyl</span><span class="med-info">Véralvadást segítő - 500-1000mg</span></div>
+                            <div class="med-item"><span class="med-name">Arterenol</span><span class="med-info">Pulzus emelése - 0.5-1mg</span></div>
+                            <div class="med-item"><span class="med-name">Tonogen</span><span class="med-info">Pulzus emelése - 0.3-0.5mg</span></div>
+                            <div class="med-item"><span class="med-name">No-Spa</span><span class="med-info">Görcsoldó - 40-80mg</span></div>
+                            <div class="med-item"><span class="med-name">Midozolam</span><span class="med-info">Szedálás - 2-5mg</span></div>
+                            <div class="med-item"><span class="med-name">Isolitye</span><span class="med-info">Infúziós folyadék - 500ml</span></div>
+                            <div class="med-item"><span class="med-name">Glucagen</span><span class="med-info">Alacsony vércukor - 1mg</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="card">
+                    <div class="output-header">
+                        <h2>Generált szöveg</h2>
+                        <button class="btn-copy-all" onclick="copyAll()">Összes másolása</button>
+                    </div>
+                    <div id="output">
+                        <div class="placeholder">Válassz sérülés típust és kattints a "Generálás" gombra</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== MEDICAL DATA ====================
+        const MEDICAL_DATA = {
+            bodyParts: {
+                "bal_kar": "bal karját",
+                "jobb_kar": "jobb karját",
+                "bal_kez": "bal kezét",
+                "jobb_kez": "jobb kezét",
+                "bal_vall": "bal vállát",
+                "jobb_vall": "jobb vállát",
+                "bal_konyok": "bal könyökét",
+                "jobb_konyok": "jobb könyökét",
+                "bal_csuklo": "bal csuklóját",
+                "jobb_csuklo": "jobb csuklóját",
+                "bal_lab": "bal lábát",
+                "jobb_lab": "jobb lábát",
+                "bal_comb": "bal combját",
+                "jobb_comb": "jobb combját",
+                "bal_terd": "bal térdét",
+                "jobb_terd": "jobb térdét",
+                "bal_boka": "bal bokáját",
+                "jobb_boka": "jobb bokáját",
+                "mellkas": "mellkasát",
+                "has": "hasát",
+                "hat": "hátát",
+                "fej": "fejét",
+                "arc": "arcát"
+            },
+
+            bodyPartsOn: {
+                "bal_kar": "bal karján",
+                "jobb_kar": "jobb karján",
+                "bal_kez": "bal kezén",
+                "jobb_kez": "jobb kezén",
+                "bal_vall": "bal vállán",
+                "jobb_vall": "jobb vállán",
+                "bal_konyok": "bal könyökén",
+                "jobb_konyok": "jobb könyökén",
+                "bal_csuklo": "bal csuklóján",
+                "jobb_csuklo": "jobb csuklóján",
+                "bal_lab": "bal lábán",
+                "jobb_lab": "jobb lábán",
+                "bal_comb": "bal combján",
+                "jobb_comb": "jobb combján",
+                "bal_terd": "bal térdén",
+                "jobb_terd": "jobb térdén",
+                "bal_boka": "bal bokáján",
+                "jobb_boka": "jobb bokáján",
+                "mellkas": "mellkasán",
+                "has": "hasán",
+                "hat": "hátán",
+                "fej": "fején",
+                "arc": "arcán"
+            },
+
+            bodyPartsAround: {
+                "bal_kar": "bal karja körül",
+                "jobb_kar": "jobb karja körül",
+                "bal_kez": "bal keze körül",
+                "jobb_kez": "jobb keze körül",
+                "bal_vall": "bal válla körül",
+                "jobb_vall": "jobb válla körül",
+                "bal_konyok": "bal könyöke körül",
+                "jobb_konyok": "jobb könyöke körül",
+                "bal_csuklo": "bal csuklója körül",
+                "jobb_csuklo": "jobb csuklója körül",
+                "bal_lab": "bal lába körül",
+                "jobb_lab": "jobb lába körül",
+                "bal_comb": "bal combja körül",
+                "jobb_comb": "jobb combja körül",
+                "bal_terd": "bal térde körül",
+                "jobb_terd": "jobb térde körül",
+                "bal_boka": "bal bokája körül",
+                "jobb_boka": "jobb bokája körül",
+                "mellkas": "mellkasa körül",
+                "has": "hasa körül",
+                "hat": "háta körül",
+                "fej": "feje körül",
+                "arc": "arca körül"
+            },
+
+            dosages: {
+                algopyrin: { enyhe: "500 mg", kozepes: "1000 mg", sulyos: "1500 mg" },
+                morphine: { enyhe: null, kozepes: "5 mg", sulyos: "10 mg" },
+                lidocain: { enyhe: "1 ml", kozepes: "2 ml", sulyos: "3 ml" },
+                exacyl: { enyhe: null, kozepes: "500 mg", sulyos: "1000 mg" },
+                arterenol: { enyhe: "0.5 mg", kozepes: "0.75 mg", sulyos: "1 mg" },
+                tonogen: { enyhe: "0.3 mg", kozepes: "0.4 mg", sulyos: "0.5 mg" }
+            },
+
+            vitals: {
+                enyhe: { pulseMin: 60, pulseMax: 100, sysMin: 110, sysMax: 130, diaMin: 70, diaMax: 85, spo2Min: 96, spo2Max: 99 },
+                kozepes: { pulseMin: 80, pulseMax: 110, sysMin: 95, sysMax: 115, diaMin: 60, diaMax: 75, spo2Min: 93, spo2Max: 96 },
+                sulyos: { pulseMin: 100, pulseMax: 130, sysMin: 80, sysMax: 100, diaMin: 50, diaMax: 65, spo2Min: 88, spo2Max: 94 }
+            },
+
+            injuries: {
+                feluleti_seb: {
+                    name: "Felületi seb",
+                    requiresBodyPart: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} {woundDesc} látható." },
+                            { type: "me", text: "előveszi a betadine-t és egy steril mull lapot a táskájából" },
+                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal megtisztítja a sebet a törmeléktől és alvadéktól" },
+                            { type: "me", text: "elővesz egy újabb steril mull lapot és lefedi vele a sebet" },
+                            { type: "me", text: "előkészíti a mullpólyát, majd körkörösen rögzíti a kötést a sérült {bodyPartAround}" },
+                            { type: "do", text: "A seb ellátva, a kötés stabilan rögzítve." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} {woundDesc} látható." },
+                            { type: "me", text: "előveszi a betadine-t és egy steril mull lapot" },
+                            { type: "me", text: "megtisztítja a sebet a fertőtlenítővel átitatott lappal" },
+                            { type: "me", text: "steril mull lappal lefedi a sebet" },
+                            { type: "me", text: "mullpólyával rögzíti a kötést" },
+                            { type: "do", text: "A seb ellátva, a kötés stabilan rögzítve." }
+                        ]
+                    },
+                    woundDescriptions: {
+                        enyhe: ["kisebb horzsolás", "felületi karcolás", "enyhe vágás"],
+                        kozepes: ["közepes mélységű vágás", "vérzéses sérülés", "látható seb"],
+                        sulyos: ["mély vágás", "súlyos sérülés", "nagy kiterjedésű seb"]
+                    }
+                },
+
+                zuzodas: {
+                    name: "Zúzódás",
+                    requiresBodyPart: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "do", text: "A sérült {bodyPartOn} {bruiseDesc} látható." },
+                            { type: "me", text: "előveszi a jégzselét a táskájából" },
+                            { type: "me", text: "a zúzódott területre keni a jégzselét" },
+                            { type: "me", text: "előkészíti a rugalmas pólyát és lefedi vele az érintett területet" },
+                            { type: "do", text: "A zúzódás ellátva." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "do", text: "A sérült {bodyPartOn} {bruiseDesc} látható." },
+                            { type: "me", text: "előveszi a jégzselét és a rugalmas pólyát" },
+                            { type: "me", text: "a zúzódott területre keni a jégzselét" },
+                            { type: "me", text: "rugalmas pólyával lefedi az érintett területet" },
+                            { type: "do", text: "A zúzódás ellátva." }
+                        ]
+                    },
+                    bruiseDescriptions: {
+                        enyhe: ["enyhe kékes elszíneződés", "kisebb zúzódás nyoma"],
+                        kozepes: ["kékes-lilás elszíneződés és duzzanat", "közepes méretű zúzódás"],
+                        sulyos: ["nagy kiterjedésű, sötétlila zúzódás", "jelentős duzzanattal járó zúzódás"]
+                    }
+                },
+
+                huzodas: {
+                    name: "Húzódás",
+                    requiresBodyPart: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}, tapogatással ellenőrzi az állapotát" },
+                            { type: "do", text: "A sérült {bodyPartOn} {strainDesc}." },
+                            { type: "me", text: "előveszi a jégzselét a táskájából", severity: ["enyhe"] },
+                            { type: "me", text: "bekeni a fájó területet a jégzselével", severity: ["enyhe"] },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, majd felszívja a {algopyrinDose}-ot", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "beadja a fájdalomcsillapítót a sérültnek intramuszkulárisan", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "A sérült fájdalma enyhül." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "do", text: "A sérült {bodyPartOn} {strainDesc}." },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, felszívja a {algopyrinDose}-ot" },
+                            { type: "me", text: "beadja a fájdalomcsillapítót" },
+                            { type: "do", text: "A sérült fájdalma enyhül." }
+                        ]
+                    },
+                    strainDescriptions: {
+                        enyhe: ["enyhe fájdalmas érzékenység tapintható", "kisebb izomhúzódás érezhető"],
+                        kozepes: ["fájdalmas duzzanat és izomfeszülés tapintható", "közepes izomhúzódás, mozgásnehézség"],
+                        sulyos: ["erős fájdalom és jelentős duzzanat, mozgásképtelenség", "súlyos izomhúzódás"]
+                    }
+                },
+
+                randulas: {
+                    name: "Rándulás",
+                    requiresBodyPart: true,
+                    includesKEM: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "me", text: "KÉM vizsgálatot végez: ellenőrzi a keringést, érzést és mozgást a végtagban" },
+                            { type: "do", text: "A végtagon a pulzus tapintható, a sérült érzi a végtagot, de {kemResult}." },
+                            { type: "do", text: "A sérült {bodyPartOn} {sprainDesc}." },
+                            { type: "me", text: "előveszi a jégzselét a táskájából" },
+                            { type: "me", text: "az érintett ízületre keni a jégzselét" },
+                            { type: "me", text: "előkészíti a rugalmas pólyát és rögzíti vele a sérült {bodyPart}", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "A rándulás ellátva, az ízület rögzítve." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "me", text: "KÉM vizsgálatot végez" },
+                            { type: "do", text: "A végtagon a pulzus tapintható, a sérült érzi a végtagot, de {kemResult}." },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, felszívja a {algopyrinDose}-ot" },
+                            { type: "me", text: "beadja a fájdalomcsillapítót" },
+                            { type: "me", text: "rugalmas pólyával rögzíti az ízületet" },
+                            { type: "do", text: "A rándulás ellátva." }
+                        ]
+                    },
+                    sprainDescriptions: {
+                        enyhe: ["enyhe duzzanat és fájdalom érzékelhető", "kisebb ízületi fájdalom"],
+                        kozepes: ["duzzanat és fájdalom, instabilitás érzékelhető", "közepes ízületi sérülés"],
+                        sulyos: ["jelentős duzzanat, erős fájdalom és instabilitás", "súlyos rándulás"]
+                    },
+                    kemResults: {
+                        enyhe: ["a mozgás kissé korlátozott", "enyhe fájdalommal mozgatható"],
+                        kozepes: ["a mozgás korlátozott és fájdalmas", "nehezen mozgatható"],
+                        sulyos: ["a mozgás erősen korlátozott", "szinte mozgásképtelen"]
+                    }
+                },
+
+                ficam: {
+                    name: "Ficam",
+                    requiresBodyPart: true,
+                    includesKEM: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és azonnal észleli a kóros ízületi helyzetet" },
+                            { type: "do", text: "A sérült {bodyPartOn} az ízület láthatóan kóros helyzetben van, az ízületi fej kimozdul a vápából." },
+                            { type: "me", text: "KÉM vizsgálatot végez a végtagban" },
+                            { type: "do", text: "Pulzus: {pulse}/perc, érzés: {sensation}, mozgás: {movement}." },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, felszívja a {algopyrinDose}-ot" },
+                            { type: "me", text: "beadja a fájdalomcsillapítót a sérültnek" },
+                            { type: "me", text: "megpróbálja óvatosan repozícionálni az ízületet", severity: ["enyhe", "kozepes"] },
+                            { type: "do", text: "A repozícionálás {repoResult}.", severity: ["enyhe", "kozepes"] },
+                            { type: "me", text: "előkészíti a rugalmas pólyát és háromszög kendőt, rögzíti a végtagot" },
+                            { type: "do", text: "A sérültet kórházba kell szállítani további ellátásra.", severity: ["sulyos"] }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "do", text: "A sérült {bodyPartOn} az ízület ficamodott, kóros helyzetben." },
+                            { type: "me", text: "KÉM vizsgálatot végez" },
+                            { type: "me", text: "elővesz egy Midozolam ampullát és egy fecskendőt, felszívja a 3 mg izomrelaxánst" },
+                            { type: "me", text: "beadja az izomrelaxánst a sérültnek intravénásan" },
+                            { type: "me", text: "óvatosan repozícionálja az ízületet" },
+                            { type: "do", text: "Az ízület visszakerült a helyére." },
+                            { type: "me", text: "röntgen vizsgálatra küldi a sérültet" },
+                            { type: "me", text: "rögzíti a végtagot" }
+                        ]
+                    }
+                },
+
+                verzes_kapillaris: {
+                    name: "Kapilláris vérzés",
+                    requiresBodyPart: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "szabaddá teszi a sérülés környékét a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} kapilláris vérzés látható, a vér lassan, gyöngyözve távozik." },
+                            { type: "me", text: "előveszi a betadine-t és egy steril mull lapot a táskájából" },
+                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal megtisztítja a sebet" },
+                            { type: "me", text: "egy újabb steril mull lappal lefedi a sebet" },
+                            { type: "me", text: "előkészíti a mullpólyát és rögzíti a kötést" },
+                            { type: "do", text: "A vérzés megállt, a seb ellátva." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "szabaddá teszi a sérülés környékét" },
+                            { type: "do", text: "Kapilláris vérzés a sérült {bodyPartOn}." },
+                            { type: "me", text: "előveszi a fertőtlenítőt és a kötszert" },
+                            { type: "me", text: "fertőtleníti és bekötözi a sebet" },
+                            { type: "do", text: "A vérzés megállt." }
+                        ]
+                    }
+                },
+
+                verzes_venas: {
+                    name: "Vénás vérzés",
+                    requiresBodyPart: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "szabaddá teszi a sérülés környékét a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} vénás vérzés látható, sötétpiros vér lassan, bőven folyik." },
+                            { type: "me", text: "előveszi a steril mull lapokat a táskájából" },
+                            { type: "me", text: "mull lappal megtisztítja a sebet" },
+                            { type: "me", text: "direkt nyomást alkalmaz a seben, erősen nyomva a mull lapot a sebre" },
+                            { type: "me", text: "mull pólya hengerből \"bucit\" készít és a sebre helyezi" },
+                            { type: "me", text: "nyomókötést rögzít körkörös pólyamenetekkel" },
+                            { type: "do", text: "A vérzés {bleedResult}.", severity: ["enyhe", "kozepes"] },
+                            { type: "me", text: "második \"bucit\" helyez az elsőre, újabb pólyamenetekkel rögzíti", severity: ["sulyos"] },
+                            { type: "do", text: "A vérzés csillapodik, a nyomókötés hatásos." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "szabaddá teszi a sérülés környékét" },
+                            { type: "do", text: "Vénás vérzés a sérült {bodyPartOn}, sötétpiros vér folyik." },
+                            { type: "me", text: "előkészíti a nyomókötéshez szükséges eszközöket" },
+                            { type: "me", text: "nyomókötést alkalmaz" },
+                            { type: "do", text: "A vérzés csillapodik." }
+                        ]
+                    },
+                    bleedResults: {
+                        enyhe: ["megállt", "csillapodik"],
+                        kozepes: ["jelentősen csökkent", "csillapodik"],
+                        sulyos: ["még mindig intenzív, további ellátás szükséges"]
+                    }
+                },
+
+                verzes_arterias: {
+                    name: "Artériás vérzés",
+                    requiresBodyPart: true,
+                    isCritical: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "szabaddá teszi a sérülés környékét a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} artériás vérzés látható, világospiros vér lüktetve, nagy intenzitással távozik!" },
+                            { type: "me", text: "azonnal direkt nyomást alkalmaz a seben a kezével" },
+                            { type: "me", text: "a végtagot megemeli a szív szintje fölé" },
+                            { type: "me", text: "előkészíti a mull pólyát, \"bucit\" készít és a sebre nyomja" },
+                            { type: "me", text: "nyomókötést rögzít körkörös pólyamenetekkel" },
+                            { type: "me", text: "második \"bucit\" helyez az elsőre és ezt is rögzíti" },
+                            { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt, felszívja a {exacylDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja az Exacyl-t intravénásan a véralvadás segítésére", severity: ["sulyos"] },
+                            { type: "do", text: "A vérzés intenzitása {arterialResult}." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "szabaddá teszi a sérülés környékét" },
+                            { type: "do", text: "Artériás vérzés a sérült {bodyPartOn}!" },
+                            { type: "me", text: "azonnali nyomókötést alkalmaz" },
+                            { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt, felszívja a {exacylDose}-ot" },
+                            { type: "me", text: "beadja az Exacyl-t intravénásan" },
+                            { type: "me", text: "előkészíti az infúziós szerelést és intravénás vérpótlást indít", severity: ["sulyos"] },
+                            { type: "do", text: "A vérzés csillapodik." }
+                        ]
+                    },
+                    arterialResults: {
+                        enyhe: ["csökkent, a kötés hatásos"],
+                        kozepes: ["jelentősen csökkent, de megfigyelés szükséges"],
+                        sulyos: ["csökkent, de sürgős kórházi ellátás szükséges"]
+                    }
+                },
+
+                tores_zart: {
+                    name: "Zárt törés",
+                    requiresBodyPart: true,
+                    includesKEM: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} deformáció látható, fájdalmas és mozgásképtelen, de a bőr ép." },
+                            { type: "me", text: "KÉM vizsgálatot végez a végtagban" },
+                            { type: "do", text: "Pulzus tapintható, érzés {sensation}, mozgás erősen korlátozott." },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, felszívja a {algopyrinDose}-ot", severity: ["enyhe", "kozepes"] },
+                            { type: "me", text: "beadja a fájdalomcsillapítót intramuszkulárisan", severity: ["enyhe", "kozepes"] },
+                            { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja a Morphine-t intravénásan a fájdalom csillapítására", severity: ["sulyos"] },
+                            { type: "do", text: "A sérült fájdalma enyhül." },
+                            { type: "me", text: "előkészíti az önkeményedő műanyag pólyát és rögzíti a törést", severity: ["enyhe"] },
+                            { type: "me", text: "előkészíti a kramer sínt és a rugalmas pólyát", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "a sínt a végtagra helyezi és rugalmas pólyával rögzíti", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "A végtag rögzített. {hospitalNote}" }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "me", text: "KÉM vizsgálatot végez" },
+                            { type: "me", text: "röntgen vizsgálatra küldi a sérültet" },
+                            { type: "do", text: "A röntgenfelvételen zárt törés látható a sérült {bodyPartOn}." },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, felszívja a {algopyrinDose}-ot" },
+                            { type: "me", text: "beadja a fájdalomcsillapítót" },
+                            { type: "me", text: "előkészíti a gipszeléshez szükséges eszközöket" },
+                            { type: "me", text: "tálba langyos vizet tölt és belemártja a gipszpólyát" },
+                            { type: "me", text: "alábélelő pólyameneteket helyez a végtagra" },
+                            { type: "me", text: "vattalapokat rögzít a pólyára" },
+                            { type: "me", text: "a beáztatott gipszpólyát körkörösen felviszi és megformálja" },
+                            { type: "me", text: "fedő pólyamenettel rögzíti a gipszet" },
+                            { type: "do", text: "A gipszelés kész, a törés rögzített." }
+                        ]
+                    },
+                    hospitalNotes: {
+                        enyhe: "",
+                        kozepes: "Kórházi gipszelés javasolt.",
+                        sulyos: "Sürgős kórházi ellátás szükséges!"
+                    }
+                },
+
+                tores_nyilt: {
+                    name: "Nyílt törés",
+                    requiresBodyPart: true,
+                    includesKEM: true,
+                    isCritical: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} nyílt törés látható, a csont kilátszik a bőrből!" },
+                            { type: "me", text: "KÉM vizsgálatot végez" },
+                            { type: "do", text: "Pulzus: {pulse}/perc, érzés és mozgás erősen korlátozott." },
+                            { type: "me", text: "előkészíti a steril kötszert, óvatosan lefedi a sebet a csont körül, nem nyomva rá" },
+                            { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot" },
+                            { type: "me", text: "beadja a Morphine-t intravénásan a fájdalom csillapítására" },
+                            { type: "me", text: "előkészíti a rögzítő sínt és a végtagra helyezi" },
+                            { type: "do", text: "A sérültet sürgősen kórházba kell szállítani!" }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart}" },
+                            { type: "do", text: "Nyílt törés a sérült {bodyPartOn}." },
+                            { type: "me", text: "képalkotó vizsgálatra küldi a sérültet" },
+                            { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot" },
+                            { type: "me", text: "beadja a Morphine érzéstelenítést" },
+                            { type: "me", text: "előkészíti az infúziós szerelést és intravénás vérpótlást indít" },
+                            { type: "me", text: "felveszi a steril kesztyűt, előkészíti a műtős felszerelést" },
+                            { type: "me", text: "szikével feltárja és kiszélesíti a sebet" },
+                            { type: "me", text: "sebterpesztőt helyez be" },
+                            { type: "me", text: "repozícionálja a két csontvéget" },
+                            { type: "me", text: "tűfogóval és tűvel összezárja a sebet" },
+                            { type: "me", text: "fertőtleníti és bekötözi a sebet" },
+                            { type: "me", text: "gipszelést végez" },
+                            { type: "do", text: "A műtét sikeres, a törés ellátva." }
+                        ]
+                    }
+                },
+
+                lott_serules: {
+                    name: "Lőtt sérülés",
+                    requiresBodyPart: true,
+                    isCritical: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérültet" },
+                            { type: "do", text: "A sérült {bodyPartOn} lőtt seb látható." },
+                            { type: "me", text: "eltávolítja a ruházatot a sérülés környékéről" },
+                            { type: "me", text: "előkészíti a kötszert és nyomókötést helyez a sebre" },
+                            { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt, felszívja a {lidocainDose}-t", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "beadja a helyi érzéstelenítőt közvetlenül a seb mellé", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt, felszívja a {exacylDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja az Exacyl-t intravénásan a vérzés csillapítására", severity: ["sulyos"] },
+                            { type: "do", text: "A sérültet sürgősen kórházba kell szállítani!" }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérültet" },
+                            { type: "do", text: "Lőtt sérülés a sérült {bodyPartOn}." },
+                            { type: "me", text: "képalkotó vizsgálatra küldi" },
+                            { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot" },
+                            { type: "me", text: "beadja a Morphine érzéstelenítést" },
+                            { type: "me", text: "előkészíti az infúziós szerelést, intravénás infúziót és vérpótlást indít" },
+                            { type: "me", text: "felveszi a steril kesztyűt, előkészíti a műtős felszerelést" },
+                            { type: "me", text: "szikével feltárja a sebet" },
+                            { type: "me", text: "sebterpesztőt helyez be" },
+                            { type: "me", text: "csipesszel eltávolítja a repeszeket és idegentesteket" },
+                            { type: "me", text: "tűfogóval összezárja a sebet" },
+                            { type: "me", text: "fertőtleníti és bekötözi a sebet" },
+                            { type: "do", text: "A műtét sikeres, a lövedék eltávolítva." }
+                        ]
+                    }
+                },
+
+                ajulas: {
+                    name: "Ájulás / Eszméletvesztés",
+                    requiresBodyPart: false,
+                    isCritical: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megszólítja és megpróbálja felébreszteni a sérültet, megrázzza a vállát" },
+                            { type: "do", text: "A sérült nem reagál az ingerekre." },
+                            { type: "me", text: "ellenőrzi a légzést és keringést" },
+                            { type: "do", text: "Légzés: {breathing}, pulzus: gyenge és szapora." },
+                            { type: "me", text: "előveszi a vérnyomásmérőt, pulzoxymétert" },
+                            { type: "me", text: "megméri a vérnyomást, oxigénszintet és pulzust" },
+                            { type: "do", text: "Vérnyomás: {bp} Hgmm, Pulzus: {pulse}/perc, SpO2: {spo2}%" },
+                            { type: "me", text: "légútbiztosítást alkalmaz, hátrahajtja a fejet" },
+                            { type: "me", text: "előkészíti az oxigénpalackot és maszkot, oxigénterápiát alkalmaz" },
+                            { type: "me", text: "előkészíti az infúziós szerelést, vénát biztosít és infúziót indít" },
+                            { type: "me", text: "megemeli a sérült alsó végtagjait a szív szintje fölé" },
+                            { type: "me", text: "elővesz egy Arterenol ampullát és egy fecskendőt, felszívja a {arterenolDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja az Arterenolt intravénásan", severity: ["sulyos"] },
+                            { type: "do", text: "A sérült állapota {condition}." }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja az eszméletlen beteget" },
+                            { type: "do", text: "A beteg eszméletlen, nem reagál." },
+                            { type: "me", text: "előkészíti a monitorozó eszközöket" },
+                            { type: "me", text: "megméri a vitális paramétereket" },
+                            { type: "do", text: "Vérnyomás: {bp} Hgmm, Pulzus: {pulse}/perc, SpO2: {spo2}%" },
+                            { type: "me", text: "légútbiztosítást és oxigénterápiát alkalmaz" },
+                            { type: "me", text: "vénát biztosít, infúziót indít" },
+                            { type: "me", text: "elővesz egy Arterenol ampullát és egy fecskendőt, felszívja a {arterenolDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja az Arterenolt intravénásan", severity: ["sulyos"] },
+                            { type: "do", text: "A beteg állapota stabilizálódik." }
+                        ]
+                    },
+                    breathingDescriptions: {
+                        enyhe: ["felületes de szabályos", "gyenge de érzékelhető"],
+                        kozepes: ["felületes és gyenge", "nehezített"],
+                        sulyos: ["alig érzékelhető", "nagyon gyenge"]
+                    },
+                    conditionResults: {
+                        enyhe: ["stabilizálódik", "javul"],
+                        kozepes: ["lassan stabilizálódik", "megfigyelés szükséges"],
+                        sulyos: ["kritikus, intenzív ellátás szükséges"]
+                    }
+                }
+            },
+
+            procedures: {
+                venabiztositas: {
+                    name: "Vénabiztosítás",
+                    steps: [
+                        { type: "me", text: "előkészíti a szükséges eszközöket: branül, stranguláló gumi, cutasept, leukoplaszt" },
+                        { type: "me", text: "megfelelő vénát keres a beteg karján" },
+                        { type: "me", text: "a stranguláló gumival elszorítja a végtagot a szúrás helye fölött" },
+                        { type: "me", text: "cutasepttel fertőtleníti a szúrás helyét" },
+                        { type: "me", text: "a branült a vénába szúrja, majd kihúzza a vezetőnyársat" },
+                        { type: "me", text: "felengedi a strangulálást" },
+                        { type: "me", text: "bemosó folyadékkal ellenőrzi, hogy a véna vezet-e" },
+                        { type: "do", text: "A véna vezet, nem fájdalmas és nem dagad." },
+                        { type: "me", text: "leukoplaszttal rögzíti a branült" },
+                        { type: "me", text: "csatlakoztatja az infúziót" },
+                        { type: "do", text: "A véna biztosítva, az infúzió folyik." }
+                    ]
+                },
+
+                vernyomas_meres: {
+                    name: "Vérnyomás mérés",
+                    steps: [
+                        { type: "me", text: "előveszi a vérnyomásmérőt a táskájából" },
+                        { type: "me", text: "a vérnyomásmérő mandzsettáját a beteg felkarjára helyezi a könyökhajlat felé" },
+                        { type: "me", text: "elindítja a mérést a készüléken" },
+                        { type: "me", text: "megvárja amíg a mérés befejeződik, majd leolvassa az értékeket" },
+                        { type: "do", text: "A vérnyomás: {systolic}/{diastolic} Hgmm." }
+                    ]
+                },
+
+                pulzoxy_meres: {
+                    name: "Pulzoximéter mérés",
+                    steps: [
+                        { type: "me", text: "előveszi a pulzoxymétert a táskájából" },
+                        { type: "me", text: "a pulzoxymétert a beteg ujjára csipteti" },
+                        { type: "me", text: "megvárja amíg a készülék stabil értéket mutat" },
+                        { type: "me", text: "leolvassa a pulzust és oxigén telítettség értékét" },
+                        { type: "do", text: "Pulzus: {pulse}/perc, SpO2: {spo2}%." }
+                    ]
+                },
+
+                vercukor_meres: {
+                    name: "Vércukor mérés",
+                    steps: [
+                        { type: "me", text: "előveszi a vércukormérőt, egy tűt és fertőtlenítőt a táskájából" },
+                        { type: "me", text: "lefertőtleníti a beteg ujját" },
+                        { type: "me", text: "tűvel megszúrja az ujjbegyet" },
+                        { type: "me", text: "a kicseppenő vért a vércukormérő mérőtálcájára cseppenti" },
+                        { type: "me", text: "mull lapot helyez a szúrás helyére" },
+                        { type: "me", text: "leolvassa az eredményt a mérőről" },
+                        { type: "do", text: "A vércukor értéke: {bloodSugar} mmol/L." }
+                    ]
+                },
+
+                ekg: {
+                    name: "EKG készítés",
+                    steps: [
+                        { type: "me", text: "előkészíti az EKG gépet és az elektródákat" },
+                        { type: "me", text: "szabaddá teszi a beteg mellkasát" },
+                        { type: "me", text: "felhelyezi a négy végtagi elektródát a csuklókra és bokákra" },
+                        { type: "me", text: "felhelyezi a hat mellkasi elektródát a megfelelő pozíciókba" },
+                        { type: "me", text: "elindítja az EKG gépet" },
+                        { type: "me", text: "kiértékeli a görbét" },
+                        { type: "do", text: "Az EKG {ekgResult}." }
+                    ]
+                },
+
+                rontgen: {
+                    name: "Röntgenezés",
+                    requiresHospital: true,
+                    steps: [
+                        { type: "me", text: "levéteti az ékszereket a beteggel" },
+                        { type: "me", text: "az érintett testrészt fedő ruhadarabot levéteti" },
+                        { type: "me", text: "előkészíti az ólomkötényt és felhelyezi a betegre" },
+                        { type: "me", text: "lefekteti a beteget a röntgen asztalra" },
+                        { type: "me", text: "a vizsgálandó terület alá digitális filmet helyez" },
+                        { type: "me", text: "beállítja a röntgengépet és elkészíti a felvételt" },
+                        { type: "do", text: "A röntgenfelvétel elkészült, a kép vizsgálható." }
+                    ]
+                },
+
+                gipszeles: {
+                    name: "Gipszelés",
+                    requiresHospital: true,
+                    steps: [
+                        { type: "me", text: "előkészíti a gipszeléshez szükséges eszközöket: tál, gipszpólya, pólya, vattalap" },
+                        { type: "me", text: "tálba langyos vizet tölt" },
+                        { type: "me", text: "a gipszpólyát a vízbe helyezi" },
+                        { type: "me", text: "alábélelő pólyameneteket helyez körkörösen a végtagra" },
+                        { type: "me", text: "vattalapokat helyez az alábélelő pólyára" },
+                        { type: "me", text: "pólyamenetekkel rögzíti a vattalapokat" },
+                        { type: "me", text: "a beáztatott gipszpólyát körkörösen felviszi a végtagra" },
+                        { type: "me", text: "megformálja a gipszet a végtag alakjához" },
+                        { type: "me", text: "fedő pólyamenettel rögzíti a gipszet" },
+                        { type: "do", text: "A gipszelés elkészült, a végtag rögzített." }
+                    ]
+                }
+            }
+        };
+
+        // ==================== STATE ====================
+        let currentSeverity = 'enyhe';
+        let currentLocation = 'helyszin';
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function randomRange(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generateVitals(severity) {
+            const ranges = MEDICAL_DATA.vitals[severity] || MEDICAL_DATA.vitals.enyhe;
+            return {
+                pulse: randomRange(ranges.pulseMin, ranges.pulseMax),
+                systolic: randomRange(ranges.sysMin, ranges.sysMax),
+                diastolic: randomRange(ranges.diaMin, ranges.diaMax),
+                spo2: randomRange(ranges.spo2Min, ranges.spo2Max),
+                bloodSugar: (randomRange(40, 70) / 10).toFixed(1)
+            };
+        }
+
+        function getDosage(drug, severity) {
+            const dosages = MEDICAL_DATA.dosages[drug];
+            if (!dosages) return '';
+            return dosages[severity] || dosages.kozepes || '';
+        }
+
+        function processTemplate(text, context) {
+            let result = text;
+
+            result = result.replace(/{bodyPart}/g, context.bodyPart || '');
+            result = result.replace(/{bodyPartOn}/g, context.bodyPartOn || '');
+            result = result.replace(/{bodyPartAround}/g, context.bodyPartAround || '');
+            result = result.replace(/{woundDesc}/g, context.woundDesc || '');
+            result = result.replace(/{bruiseDesc}/g, context.bruiseDesc || '');
+            result = result.replace(/{strainDesc}/g, context.strainDesc || '');
+            result = result.replace(/{sprainDesc}/g, context.sprainDesc || '');
+            result = result.replace(/{kemResult}/g, context.kemResult || '');
+            result = result.replace(/{bleedResult}/g, context.bleedResult || '');
+            result = result.replace(/{arterialResult}/g, context.arterialResult || '');
+            result = result.replace(/{hospitalNote}/g, context.hospitalNote || '');
+            result = result.replace(/{repoResult}/g, context.repoResult || '');
+            result = result.replace(/{breathing}/g, context.breathing || '');
+            result = result.replace(/{condition}/g, context.condition || '');
+            result = result.replace(/{bp}/g, `${context.vitals.systolic}/${context.vitals.diastolic}`);
+            result = result.replace(/{pulse}/g, context.vitals.pulse);
+            result = result.replace(/{spo2}/g, context.vitals.spo2);
+            result = result.replace(/{systolic}/g, context.vitals.systolic);
+            result = result.replace(/{diastolic}/g, context.vitals.diastolic);
+            result = result.replace(/{bloodSugar}/g, context.vitals.bloodSugar);
+            result = result.replace(/{algopyrinDose}/g, getDosage('algopyrin', context.severity));
+            result = result.replace(/{morphineDose}/g, getDosage('morphine', context.severity));
+            result = result.replace(/{lidocainDose}/g, getDosage('lidocain', context.severity));
+            result = result.replace(/{exacylDose}/g, getDosage('exacyl', context.severity));
+            result = result.replace(/{arterenolDose}/g, getDosage('arterenol', context.severity));
+            result = result.replace(/{ekgResult}/g, randomChoice(['szabályos szinuszritmus', 'normál EKG görbe']));
+            result = result.replace(/{sensation}/g, context.severity === 'sulyos' ? 'csökkent' : 'megtartott');
+            result = result.replace(/{movement}/g, context.severity === 'sulyos' ? 'erősen korlátozott' : 'korlátozott');
+
+            return result;
+        }
+
+        // ==================== UI FUNCTIONS ====================
+        function setupButtonGroups() {
+            document.querySelectorAll('.button-group').forEach(group => {
+                group.querySelectorAll('.btn-option').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        group.querySelectorAll('.btn-option').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+
+                        if (group.id === 'severityGroup') {
+                            currentSeverity = this.dataset.value;
+                        } else if (group.id === 'locationGroup') {
+                            currentLocation = this.dataset.value;
+                            updateLocationWarnings();
+                        }
+                    });
+                });
+            });
+        }
+
+        function updateLocationWarnings() {
+            const warningBox = document.getElementById('warningBox');
+            const injuryType = document.getElementById('injuryType').value;
+            const injury = MEDICAL_DATA.injuries[injuryType];
+
+            if (injury && injury.isCritical && currentLocation === 'helyszin') {
+                warningBox.textContent = 'Figyelem: Ez súlyos sérülés, kórházi ellátás javasolt!';
+                warningBox.classList.remove('hidden');
+            } else {
+                warningBox.classList.add('hidden');
+            }
+        }
+
+        function toggleMedications() {
+            const content = document.getElementById('medicationsContent');
+            const header = content.previousElementSibling;
+            content.classList.toggle('collapsed');
+            header.classList.toggle('collapsed');
+        }
+
+        // ==================== GENERATION FUNCTIONS ====================
+        function generateRP() {
+            const injuryType = document.getElementById('injuryType').value;
+            const bodyPartId = document.getElementById('bodyPart').value;
+
+            if (!injuryType) {
+                alert('Kérlek válassz sérülés típust!');
+                return;
+            }
+
+            const injury = MEDICAL_DATA.injuries[injuryType];
+
+            if (injury.requiresBodyPart && !bodyPartId) {
+                alert('Kérlek válassz testrészt!');
+                return;
+            }
+
+            const protocol = injury.protocols[currentLocation];
+            if (!protocol) {
+                alert('Ez a sérülés típus nem elérhető ezen a helyszínen.');
+                return;
+            }
+
+            const vitals = generateVitals(currentSeverity);
+            const bodyPart = MEDICAL_DATA.bodyParts[bodyPartId] || '';
+            const bodyPartOn = MEDICAL_DATA.bodyPartsOn[bodyPartId] || '';
+            const bodyPartAround = MEDICAL_DATA.bodyPartsAround[bodyPartId] || '';
+
+            const context = {
+                bodyPart: bodyPart,
+                bodyPartOn: bodyPartOn,
+                bodyPartAround: bodyPartAround,
+                vitals: vitals,
+                severity: currentSeverity,
+                woundDesc: injury.woundDescriptions ? randomChoice(injury.woundDescriptions[currentSeverity]) : '',
+                bruiseDesc: injury.bruiseDescriptions ? randomChoice(injury.bruiseDescriptions[currentSeverity]) : '',
+                strainDesc: injury.strainDescriptions ? randomChoice(injury.strainDescriptions[currentSeverity]) : '',
+                sprainDesc: injury.sprainDescriptions ? randomChoice(injury.sprainDescriptions[currentSeverity]) : '',
+                kemResult: injury.kemResults ? randomChoice(injury.kemResults[currentSeverity]) : '',
+                bleedResult: injury.bleedResults ? randomChoice(injury.bleedResults[currentSeverity]) : '',
+                arterialResult: injury.arterialResults ? randomChoice(injury.arterialResults[currentSeverity]) : '',
+                hospitalNote: injury.hospitalNotes ? injury.hospitalNotes[currentSeverity] : '',
+                repoResult: currentSeverity === 'sulyos' ? 'sikertelen, kórházi ellátás szükséges' : 'sikeres',
+                breathing: injury.breathingDescriptions ? randomChoice(injury.breathingDescriptions[currentSeverity]) : '',
+                condition: injury.conditionResults ? randomChoice(injury.conditionResults[currentSeverity]) : ''
+            };
+
+            const lines = [];
+
+            for (const step of protocol) {
+                if (step.severity && !step.severity.includes(currentSeverity)) {
+                    continue;
+                }
+
+                const processedText = processTemplate(step.text, context);
+                lines.push({
+                    type: step.type,
+                    text: `/${step.type} ${processedText}`
+                });
+            }
+
+            renderOutput(lines);
+        }
+
+        function generateProcedure(procedureId) {
+            const procedure = MEDICAL_DATA.procedures[procedureId];
+
+            if (!procedure) {
+                alert('Ismeretlen beavatkozás!');
+                return;
+            }
+
+            if (procedure.requiresHospital && currentLocation !== 'korhaz') {
+                alert('Ez a beavatkozás csak kórházban végezhető!');
+                return;
+            }
+
+            const vitals = generateVitals('enyhe');
+            const context = {
+                bodyPart: '',
+                bodyPartOn: '',
+                bodyPartAround: '',
+                vitals: vitals,
+                severity: 'enyhe'
+            };
+
+            const lines = [];
+
+            for (const step of procedure.steps) {
+                const processedText = processTemplate(step.text, context);
+                lines.push({
+                    type: step.type,
+                    text: `/${step.type} ${processedText}`
+                });
+            }
+
+            renderOutput(lines);
+        }
+
+        function renderOutput(lines) {
+            const output = document.getElementById('output');
+
+            if (lines.length === 0) {
+                output.innerHTML = '<div class="placeholder">Nincs generált szöveg</div>';
+                return;
+            }
+
+            let html = '';
+
+            for (const line of lines) {
+                const lineClass = line.type === 'me' ? 'me-line' : 'do-line';
+                html += `
+                    <div class="generated-line ${lineClass}">
+                        <span class="line-text">${escapeHtml(line.text)}</span>
+                        <button class="btn-copy" onclick="copyLine(this, '${escapeJs(line.text)}')">📋</button>
+                    </div>
+                `;
+            }
+
+            output.innerHTML = html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function escapeJs(text) {
+            return text.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        function copyLine(button, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = '✓';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = '📋';
+                    button.classList.remove('copied');
+                }, 1000);
+            }).catch(err => {
+                console.error('Másolás sikertelen:', err);
+                alert('Másolás sikertelen!');
+            });
+        }
+
+        function copyAll() {
+            const lines = document.querySelectorAll('.line-text');
+            if (lines.length === 0) {
+                alert('Nincs mit másolni!');
+                return;
+            }
+
+            const text = Array.from(lines).map(el => el.textContent).join('\n');
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.btn-copy-all');
+                const originalText = btn.textContent;
+                btn.textContent = 'Másolva! ✓';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 1500);
+            }).catch(err => {
+                console.error('Másolás sikertelen:', err);
+                alert('Másolás sikertelen!');
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            setupButtonGroups();
+
+            document.getElementById('injuryType').addEventListener('change', function() {
+                updateLocationWarnings();
+
+                const injury = MEDICAL_DATA.injuries[this.value];
+                const bodyPartGroup = document.getElementById('bodyPartGroup');
+
+                if (injury && !injury.requiresBodyPart) {
+                    bodyPartGroup.classList.add('hidden');
+                } else {
+                    bodyPartGroup.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

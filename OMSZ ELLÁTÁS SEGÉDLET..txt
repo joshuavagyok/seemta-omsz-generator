@@ -1,0 +1,298 @@
+
+Ellátások menete.
+
+Ez a leírás a SeeMTA V4 szerverére készült, több ponton eltérhet a való életben használt ellátásoktól éppen ezért a való életben történő felhasználása nem ajánlott! Az itt olvasottak kizárólag a szerveren történő RP szépítésére szolgálnak. A leírásban talált hibák/kérdések esetén keressetek bátran. A leírás a SeeMTA V4 LV hasonló leírása alapján készült, köszönjük nekik.
+
+1. Felületi sebek
+Minden olyan seb amikor a bőr sérül további mély és/vagy belsőszervi sérülés nélkül. Ilyenek a horzsolások és kisebb vágások, karcolások.
+
+Ellátásához szükséges:
+> Fertőtlenítő szer (legtöbbször betadine, octanisept)
+> Mull lap (sebletörléshez, sebfedéshez)
+> Mullpólya/géz (mull lap sebhez történő rögzítése, seb fedése)
+> Leukoplaszt („betegbarát cellux”, kötés rögzítése)
+> Sebtapasz (kisebb sérülések kezelésére)
+
+Ellátás menete:
+1. Seb körüli rész szabaddá tétele (ruhától).
+2. Seb tisztítása betadine/fertőtlenítővel átitatott mull lappal (törmeléktől, alvadéktól).
+3. Betadine/fertőtlenítővel ellátott mull lappal seb fedése.
+4. Mull lap rögzítése mull pólyával/gézzel/leukoplaszttal/ragtapasszal.
+
+
+2. Húzódás, rándulás, ficam
+Húzódás: Mechanikai behatásra az izom szerkezete sérül, ezért a végtag mozgatása nehézkes, akár mozgáskiesés is jelentkezhet.
+
+Rándulás: Amikor (térd, könyök, boka…) az izületi vápából az izületi fej kimozdul de az nem rögzül a kóros helyzetben hanem visszatér a „helyére” de a mozgás közben az izület környéki izmokat, inakat megnyújtja, sérti ezáltal fájdalom, mozgatási nehezítettség, instabilitás jelentkezhet. Kimozdulás/visszatérés során sértheti a környéken futó idegeket és ereket is.
+
+Ficam: Amikor (térd, könyök, boka…) az izületi vápából az izületi fej kimozdul és kóros helyzetben rögzül a mozgás közben az izület környéki izmokat, inakat megnyújtja és folyamatos ingerléssel szinte folyamatos fájdalmat okoz, emellett akár maradandó izom/ín/ideg/ér sérülést okozhat.
+
+Ellátásához szükséges:
+Húzódás:
+> Fájdalomcsillapító tabletta/kenőcs/krém (Algopyrin, Flector gél, Dolgit gél, Jégzselé)
+
+Rándulás:
+> Fájdalomcsillapító tabletta/kenőcs/krém (Algopyrin, Flector gél, Dolgit gél, Jégzselé)
+> Szükség esetén háromszög kendő, rugalmas pólya (rögzítéshez)
+
+Ficam:
+> Fájdalomcsillapító tabletta/kenőcs/krém (Algopyrin, Flector gél, Dolgit gél, Jégzselé)
+> Szükség esetén háromszög kendő, rugalmas pólya (rögzítéshez)
+
+Ellátás menete:
+Húzódás:
+1. Vizsgáljuk meg a sérültet, zárjuk ki a súlyosabb sérülés lehetőségét.
+2. Alkalmazzunk enyhe fájdalom esetén Jégzselét, erősebb fájdalom esetén fájdalomcsillapító tablettát/kenőcsöt/krémet.
+
+Rándulás:
+1. Vizsgáljuk meg a sérültet, zárjuk ki a súlyosabb sérülés lehetőségét, szükség esetén alkalmazzunk KÉM vizsgálatot.
+1.1. KÉM vizsgálat: keringés, érzés, mozgás - nézzünk a végtagon pulzust, tapogassuk meg és kérdezzük meg érzi-e a végtagot, kérjük meg hogy mozgassa meg a végtagot
+2. Egyéb panasz kizárása után szükség esetén alkalmazzuk a húzódásnál megismert ellátást.
+3. Egyéb panasz megléte esetén (mozgásnehezítettség, instabilitás) alkalmazzunk rögzítést rugalmas pólyával, háromszög kendővel.
+
+Ficam:
+1. Vizsgáljuk meg a sérültet, zárjuk ki a súlyosabb sérülés lehetőségét, szükség esetén alkalmazzunk KÉM vizsgálatot.
+1.1 KÉM vizsgálat: keringés, érzés, mozgás - nézzünk a végtagon pulzust, tapogassuk meg és kérdezzük meg érzi-e a végtagot, kérjük meg hogy mozgassa meg a végtagot
+2. Fájdalom esetén használjuk a húzódásnál megismert gyógyszerelést.
+3. Fájdalomcsillapítás mellett megpróbálkozhatunk a végtag repozícionálásával.
+4. Amennyiben a repozícionálás sikertelen kórházba szállítás után, izomrelaxáns alkalmazásával kórházban repozícionáljuk.
+5. Ha a repozícionálás sikeres és egyéb panasz nincsen rögzítsük a ficamnál megismert módon.
+6. Szükség esetén, ha más panasz (erős fájdalom, mozgáskiesés) jelentkezik kórházi képalkotó vizsgálat (CT, MR) lehet szükséges. Ha kórházban történik az alapvető ellátás, ez minden esetben szükséges!
+
+
+3. Zúzódás
+Olyan felületi sérülés, amely legtöbbször mechanikai behatásra jön létre és a bőr alatt képleteket (kifejezetten ereket) összezúzza emiatt fájdalom és kékes-lilás elszíneződés jön létre a bőrön a bőr rétegei közé szivárgó vér miatt.
+
+Ellátásához szükséges:
+> Jégzselé
+> Rugalmas pólya
+
+Ellátás menete:
+1. Vizsgáljuk meg a sérülést, zárjuk ki a súlyosabb sérülést.
+2. Alkalmazzunk jégzselét a sérült részen.
+3. Rugalmas pólyával fedjük a kezelt részt.
+
+
+4. Vérzések
+Minden érsérüléssel járó sérülés, a vérzés történhet a külvilágba (végtagi ér sérülése), vagy befelé a belsőszervek irányába (belső vérzés). Alapvetően 3 vérzéstípust különböztetünk meg intenzitásukat tekintve.
+
+Kapilláris/hajszáleres vérzés: Lassú, gyenge intenzitású vérzés leggyakrabban „gyöngyözve” távozik.
+
+Vénás/gyűjtőeres/viszeres vérzés: Lassan, bőven folyik, sötétpiros/bordó színű.
+
+Artériás/ütőeres/verőeres vérzés: Nagy intenzitású, lüktetve távozó, világospiros színű.
+
+Ellátásához szükséges:
+> Fertőtlenítő szer (legtöbbször betadine, octanisept)
+> Mull lap (sebletörléshez, sebfedéshez)
+> Mullpólya/géz (mull lap sebhez történő rögzítése, seb fedése, seb „eltömeszelése”)
+> Leukoplaszt („betegbarát cellux”, kötés rögzítése)
+
+
+Ellátás menete:
+Kapilláris:
+1. Seb körüli rész szabaddá tétele (ruhától).
+2. Seb tisztítása betadine/fertőtlenítővel átitatott mull lappal (törmeléktől, alvadéktól).
+3. Betadine/fertőtlenítővel ellátott mull lappal seb fedése.
+4. Mull lap rögzítése mull pólyával/gézzel/leukoplaszttal/ragtapasszal.
+
+Vénás:
+1. Seb körüli rész szabaddá tétele (ruhától).
+2. Seb tisztítása betadine/fertőtlenítővel átitatott mull lappal (törmeléktől, alvadéktól).
+3. Betadine/fertőtlenítővel ellátott mull lappal seb fedése.
+4. Direkt nyomás alkalmazása a seben. (Erősen nyomod a mull lapot a sebre/sebbe).
+5. Mull pólya henger (úgynevezett „buci”) mull lapra nyomása (ezért hívjuk „nyomókötés”-nek).
+6. Kötés rögzítése mull pólya menetekkel.
+7. Ha átvérzik újabb „buci” ráhelyezése majd további körkörös pólyamenetekkel rögzítés.
+
+Artériás:
+1. Seb körüli rész szabaddá tétele (ruhától).
+2. Seb tisztítása betadine/fertőtlenítővel átitatott mull lappal (törmeléktől, alvadéktól). Ha nagy mennyiségű a vérzés és azonnali vérzéscsillapítás szükséges ez elhagyható.
+3. Betadine/fertőtlenítővel ellátott mull lappal seb fedése. Ha nagy mennyiségű a vérzés és azonnali vérzéscsillapítás szükséges a fertőtlenítés elhagyható.
+4. Direkt nyomás alkalmazása a seben. (Erősen nyomod a mull lapot a sebre/sebbe).
+5. Végtag szív szintje fölé emelése.
+6. Mull pólya henger (úgynevezett „buci”) mull lapra nyomása (ezért hívjuk „nyomókötés”-nek).
+7. Kötés rögzítése mull pólya menetekkel.
+8. Második „buci” helyezése az elsőre majd ennek rögzítése.
+9. Ha átvérzik újabb „buci” ráhelyezése majd további körkörös pólyamenetekkel rögzítés.
+10. Ha a vérzés intenzitása nem csökken, a kötés nem elegendő akkor alkalmazhatunk Exacyl-t intravénásan ami segíti a véralvadást.
+
+
+5. Törések
+Minden olyan sérülés amikor a csont folytonossága megszakad, több típusa van. Főbb ismérve a fájdalom, deformáció, mozgáskiesés, terhelési képtelenség. Lehet zárt és lehet nyílt.
+
+Ellátásához szükséges:
+> Fájdalomcsillapító tabletta/injekció (Algopyrin, Lidocain, Morphine)
+> Rögzítő sín (kramer sín, sam splint, vákumsín)
+> Szükség esetén háromszög kendő, rugalmas pólya (rögzítéshez)
+> Önkeményedő műanyag pólya
+
+Ellátás menete:
+Kórházon kívül (kizárólag zárt törés látható el kórházon kívül):
+1. Vizsgáljuk meg a sérülést, tegyük szabaddá a ruházattól.
+2. Végezzünk KÉM vizsgálatot.
+3. Helyszínen csak zárt törés látható el. Ha a törés zárt és kórházba szállítás nem indokolt alkalmazzunk önkeményedő műanyag pólyát ami a gipsz szerepét tölti be a helyszíni ellátásban.
+4. Ha a sérült kórházba szállítandó használjunk rögzítő sínt majd a sérültet hordszéken/hordágyon mozgassuk ha alsó végtag sérült. Kórházban gipszelés szükséges.
+5. Ha nyílt törése van a sérültnek akkor lássuk el a felületi sebellátásban megismert módon a sebet, majd, rögzítsük sínnel a kórházig a végtagot.
+
+Kórházi ellátás:
+1. Vizsgáljuk meg a sérülést, tegyük szabaddá a ruházattól.
+2. Végezzünk KÉM vizsgálatot.
+3. Röntgennel megvizsgáljuk és igazoljuk a törést.
+4. Nyílt törés esetén repozícionáljuk a két csontvéget.
+5. Előkészítjük és elvégezzük a gipszelést. (Gipszelés menete lentebb részletezve)
+
+
+6. Lőtt sérülés/áthatoló sérülés/idegentest
+Ellátásához szükséges:
+> Fertőtlenítő szer (legtöbbször betadine, octanisept)
+> Mull lap (sebletörléshez, sebfedéshez)
+> Mullpólya/géz (mull lap sebhez történő rögzítése, seb fedése)
+> Leukoplaszt („betegbarát cellux”, kötés rögzítése)
+> Sebtapasz (kisebb sérülések kezelésére)
+> Műtős felszerelés (csipesz, fogó, tű, szike…)
+
+Ellátás menete:
+Helyszínen:
+1. Sérült megvizsgálása.
+2. Ruha eltávolítása.
+3. Nyomókötés helyezése a sebekre.
+4. Szükség esetén helyi érzéstelenítés (Lidocain-os injekció) közvetlenül a seb mellé.
+5. Átvérzés esetén újabb kötés felhelyezése.
+6. Ha a vérzés intenzitása nem csökken, a kötés nem elegendő akkor alkalmazhatunk Exacyl-t intravénásan ami segíti a véralvadást.
+
+Kórházban:
+1. Sérült vizsgálata.
+2. Képalkotó vizsgálat szükség esetén.
+3. Morphine érzéstelenítés, szükség esetén altatás.
+4. Szükség esetén intravénásan vérpótlás/infúzió adása.
+5. Szikével seb feltására, kiszélesítése.
+6. Sebterpesz, terpesztőfogó behelyezése.
+7. Csipesszel repeszek/idegentest eltávolítása.
+8. Seb összezárása tűfogó, tű segítségével. (A seb két szélén átvezetjük a fonalat majd összehúzzuk vele)
+9. Fertőtlenítés, kötözés.
+
+7. Ájulás, eszméletvesztés
+Olyan állapot amikor a sérült, rövid vagy hosszabb ideig olyan állapotba kerül amikor a környezetéből ingerekre nem, vagy csak alig reagál, kontaktusba nem vonható. Ilyenkor a pulzus gyenge, alacsony a vérnyomás.
+
+Ellátásához szükséges:
+> Légzésbiztosítás
+> Infúzió
+> Szükség esetén Arterenol/Tonogen alkalmazása
+
+Ellátás menete:
+1. Szólítsuk meg, rázzuk meg a sérültet, ha nem reagál vizsgáljuk meg, vizsgáljunk légzést, keringést.
+2. Ha nem reagál, de stabil állapotú mérjünk vérnyomást, oxigenizációt, pulzust.
+3. Szükség esetén alkalmazzunk légútbiztosítást (Fej hátrahajtása, nasopharyngealis tubus, oropharyngealis tubus).
+4. Alkalmazzunk oxigénterápiát maszkon keresztül, biztosítsunk vénát és indítsunk infúziót.
+5. Keressünk külsérelmi nyomot, alsó végtagot megemelhetjük szív szintje felé.
+6. Szükség esetén alkalmazzunk Arterenolt/Tonogent intravénásan.
+
+
+8. Beavatkozások
+Vénabiztosítás:
+Minden olyan esetben alkalmazhatjuk amikor a sérült nagy folyadékvesztésen ment át (vérzés, hányás, hasmenés) vagy a testben az ásványi anyagok szintje elégtelen. Alkalmazható még alacsony vérnyomás esetén.
+Szükséges:
+> Perifériás véna kanül (ismertebb nevén branül).
+> Bemosó folyadék/Infúzió
+> Bőrfetőtlenítő (legtöbbször cutasept)
+> Stranguláló gumi
+> Leukoplaszt, mull lap/Purzellin lap
+
+Menete:
+1. Keressünk szúrásra alkalmas vénát. Stranguláló gumival szorítsuk el a végtagot a szúrás helye fölött.
+2. Szúrás helyét fertőtlenítsük.
+3. Szúrjuk a branült a vénába, a branülből húzzuk ki a vezetőnyársat. Engedjük fel a strangulálást.
+4. Bizonyosodjunk meg róla, hogy a vénában vagyunk, alkalmazzunk bemosó folyadékot. Ha a véna vezet, nem fájdalmas, nem dagad beadás után akkor jó helyen vagyunk.
+5. Rögzítsük a branült leukoplaszttal, csatlakoztassuk hozzá az infúziót.
+6. Eltávolításnál a branült ragasztással együtt távolítsuk el. Mull lap/Purzellin lappal alkalmazzunk a szúrás helyén nyomást, majd ezt ragasszuk le leukoplasztal.
+
+Vércukor mérés
+Szükséges:
+> Vércukor mérő
+> Tű
+> Fertőtlenítő
+> Mull lap/Purzellin
+
+Menete:
+1. Fertőtlenítsük le a szúrandó ujjat.
+2. Szúrjuk meg tűvel az ujjat.
+3. A kicseppenő vért cseppentsük a vércukor mérő mérőtálcájára.
+4. Szúrás helyére mullapot/purzellint helyezzünk.
+5. Olvassuk le az eredményt.
+
+Vérnyomás mérés
+Szükséges:
+> Vérnyomásmérő
+
+Menete:
+1. Helyezzük a vérnyomásmérő mandzsettát a beteg felkarjára a könyökhajlat felé.
+2. Indítsuk el a készüléken a mérést.
+3. Olvassuk le az értékeket.
+
+Pulzoxy mérés
+Szükséges:
+> Pulzoxyméter
+
+Menete:
+1. Csiptessük a gépet a beteg ujjára.
+2. Olvassuk le a pulzust és az oxigén telítettség értékét.
+
+Gipszelés
+Szükséges:
+> Tál langyos vízzel
+> Gipszpólya
+> Pólya
+> Vattalap
+
+Menete:
+1. Tálban lévő vízbe helyezzük a gipszpólyát.
+2. A sérült végtagra körkörösen alábélelő pólyameneteket helyezünk.
+3. Az alábélelő pólyára vattalapokat helyezünk.
+4. Vattalapokat rögzítjük pólyamenetekkel.
+5. Beáztatott gipszpólyát felvisszük körkörösen a végtagra és megformáljuk.
+6. Fedő pólyamenettel rögzítjük a gipszet.
+
+Röntgenezés
+Menete:
+1. Ékszereket levetetni a sérültről.
+2. Az érintett testrészt érintő ruhadarabot le kell venni.
+3. Felhelyezzük az ólomkötényt a betegre.
+4. Sérültet lefektetjük a röntgen asztalra, az érintett végtag alá egy fehér fémlap alakú digitális filmet helyezünk.
+5. Elkészítjük a felvételt, amit a film gépbe helyezése után tudunk megtekinteni.
+
+EKG készítés
+Menete:
+1. Szabaddá tesszük a mellkast.
+2. Felhelyezzük a négy végtagi és 6 mellkasi elektródát.
+3. Elindítjuk a gépet majd kiértékeljük az eredményt.
+
+
+9. Gyógyszerezés
+Flector - Gyulladáscsökkentő - gél
+Lidocain - Helyi érzéstelenítő - spray/injekció
+Morphine - Kábító fájdalomcsillapító – Intravénás szer
+Aspirin - Láz és fájdalomcsillapító - Tabletta/injekció/Intravénás szer
+Ibuprofen - Láz és fájdalomcsillapító - Tabletta
+Heparin - Véralvadás gátló - Intravénás szer
+Midozolam - Szedálás, görcsgátló - Intravénás szer/Injekció
+Exacyl - Véralvadást segítő - Intravénás szer
+No-Spa - Görcsoldó - Injekció/Tabletta
+Nitralgin - Fájdalomcsillapító - Inhalációs szer
+Arterenol - Pulzus emelése, shock, eszméletvesztés - Intravénás
+Tonogen - Pulzus emelése, allergia, shock, eszméletvesztés - Intravénás
+Algopyrin - Fájdalom és lázcsillapító - Tabletta/Injekció/Intravénás
+Carbo activatus - Mérgezések szájon át - Széntabletta
+Cerucal - Hányás, hányinger, szédülés csillapítás - Injekció/Intravénás szer
+Isolitye - Infúziós folyadék - Intravénás szer
+Glucagen - Alacsony vércukor miatti eszméletlen állapot - Injekció
+Glükóz oldat - Alacsony vércukorszint - Intravénás szer
+Haloperidol - Mániás skizofrén állapotok, agresszivitás - Injekció
+
+
+10. Vitális paraméterek
+Itt felsorolt értékek felnőttekre vonatkoznak és a még tolerábilis értékek határait jelöli.
+Légzésszám: 9 és 29 /perc között
+Oxigénszint: 95% felett
+Vérnyomás: 90/60 tól 180/120 Hgmm
+Pulzus: 40 és 130 /perc között
