@@ -766,8 +766,8 @@
                         <button class="btn-procedure" onclick="generateProcedure('pulzoxy_meres')">Pulzoxy mérés</button>
                         <button class="btn-procedure" onclick="generateProcedure('vercukor_meres')">Vércukor mérés</button>
                         <button class="btn-procedure" onclick="generateProcedure('ekg')">EKG készítés</button>
-                        <button class="btn-procedure hospital-only" onclick="generateProcedure('rontgen')">Röntgenezés</button>
-                        <button class="btn-procedure hospital-only" onclick="generateProcedure('gipszeles')">Gipszelés</button>
+                        <button class="btn-procedure" onclick="generateProcedure('rontgen')">Röntgenezés</button>
+                        <button class="btn-procedure" onclick="generateProcedure('gipszeles')">Gipszelés</button>
                         <button class="btn-procedure" onclick="generateProcedure('helyszini_gipszeles')">Helyszíni gipszelés</button>
                     </div>
                 </div>
@@ -1466,7 +1466,7 @@
 
                 rontgen: {
                     name: "Röntgenezés",
-                    requiresHospital: true,
+                    requiresHospital: false,
                     steps: [
                         { type: "me", text: "levéteti az ékszereket a beteggel" },
                         { type: "me", text: "az érintett testrészt fedő ruhadarabot levéteti" },
@@ -1480,7 +1480,7 @@
 
                 gipszeles: {
                     name: "Gipszelés",
-                    requiresHospital: true,
+                    requiresHospital: false,
                     steps: [
                         { type: "me", text: "előkészíti a gipszeléshez szükséges eszközöket: tál, gipszpólya, pólya, vattalap" },
                         { type: "me", text: "tálba langyos vizet tölt" },
