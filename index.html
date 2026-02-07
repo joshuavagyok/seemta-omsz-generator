@@ -1048,9 +1048,9 @@
 
             dosages: {
                 algopyrin: { enyhe: "500 mg", kozepes: "1000 mg", sulyos: "1500 mg" },
-                morphine: { enyhe: null, kozepes: "5 mg", sulyos: "10 mg" },
+                morphine: { enyhe: "2.5 mg", kozepes: "5 mg", sulyos: "10 mg" },
                 lidocain: { enyhe: "1 ml", kozepes: "2 ml", sulyos: "3 ml" },
-                exacyl: { enyhe: null, kozepes: "500 mg", sulyos: "1000 mg" },
+                exacyl: { enyhe: "250 mg", kozepes: "500 mg", sulyos: "1000 mg" },
                 arterenol: { enyhe: "0.5 mg", kozepes: "0.75 mg", sulyos: "1 mg" },
                 tonogen: { enyhe: "0.3 mg", kozepes: "0.4 mg", sulyos: "0.5 mg" }
             },
@@ -2025,32 +2025,13 @@
 
         function generateInjection(drugId) {
             const injection = INJECTIONS[drugId];
-            if (!injection) {
-                alert('Ismeretlen gyógyszer!');
-                return;
-            }
+            if (!injection) return;
 
             const dose = getDosage(drugId, currentSeverity);
-            if (!dose) {
-                alert(`A ${injection.name} ennél a súlyosságnál (${currentSeverity}) nem alkalmazható!`);
-                return;
-            }
-
-            const patientName = document.getElementById('patientName').value.trim();
-
-            const context = {
-                patientName: patientName || null,
-                bodyPart: '',
-                bodyPartOn: '',
-                bodyPartAround: '',
-                severity: currentSeverity
-            };
-
             const lines = [];
 
             for (const step of injection.steps) {
-                let text = step.text.replace(/{dose}/g, dose);
-                text = processTemplate(text, context);
+                const text = step.text.replace(/{dose}/g, dose);
                 lines.push({
                     type: step.type,
                     text: `/${step.type} ${text}`
