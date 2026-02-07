@@ -42,6 +42,13 @@
             margin-bottom: 30px;
         }
 
+        .header-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.3));
+        }
+
         header h1 {
             font-size: 2.5rem;
             color: var(--accent);
@@ -51,6 +58,41 @@
         header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
+        }
+
+        .site-footer {
+            margin-top: 40px;
+            padding: 25px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .footer-portrait {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 15%;
+            border: 3px solid var(--accent);
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.3));
+        }
+
+        .footer-text {
+            color: var(--text-primary);
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .footer-name {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
 
         .main-layout {
@@ -674,6 +716,7 @@
 <body>
     <div class="container">
         <header>
+            <img src="Insignia_Hungary_OMSZ_v1.svg.png" alt="OMSZ Logo" class="header-logo">
             <h1>SeeMTA V4 OMSZ RP Generátor</h1>
             <p>Orvosi RP szöveg generátor az ellátási segédlet alapján</p>
         </header>
@@ -2058,5 +2101,13 @@
             addInjurySlot();
         });
     </script>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="gyorfipal.jpg" alt="Győrfi Pál" class="footer-portrait">
+            <p class="footer-text">„Vigyázzatok magatokra, vigyázzatok egymásra!"</p>
+            <p class="footer-name">- Győrfi Pál, OMSZ szóvivő</p>
+        </div>
+    </footer>
 </body>
 </html>
