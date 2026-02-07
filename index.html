@@ -41,14 +41,14 @@
 
         @keyframes float1 {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
+            33% { transform: translate(15px, -25px) scale(1.02); }
+            66% { transform: translate(-10px, 10px) scale(0.98); }
         }
 
         @keyframes float2 {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-40px, 30px) scale(1.08); }
-            66% { transform: translate(25px, -40px) scale(0.92); }
+            33% { transform: translate(-20px, 15px) scale(1.03); }
+            66% { transform: translate(12px, -20px) scale(0.97); }
         }
 
         @keyframes fadeBlurIn {
@@ -86,7 +86,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a3e, #0f0c29);
             background-size: 400% 400%;
-            animation: gradientShift 20s ease infinite;
+            animation: gradientShift 45s ease infinite;
             color: var(--text-primary);
             min-height: 100vh;
             padding: 20px;
@@ -107,19 +107,19 @@
         body::before {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(233, 69, 96, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(233, 69, 96, 0.08) 0%, transparent 70%);
             top: -100px;
             right: -100px;
-            animation: float1 15s ease-in-out infinite;
+            animation: float1 30s ease-in-out infinite;
         }
 
         body::after {
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, transparent 70%);
             bottom: -50px;
             left: -50px;
-            animation: float2 18s ease-in-out infinite;
+            animation: float2 35s ease-in-out infinite;
         }
 
         .container {
@@ -910,6 +910,18 @@
                         <button class="btn-procedure" onclick="generateProcedure('rontgen')">Röntgenezés</button>
                         <button class="btn-procedure" onclick="generateProcedure('gipszeles')">Gipszelés</button>
                         <button class="btn-procedure" onclick="generateProcedure('helyszini_gipszeles')">Helyszíni gipszelés</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h2>Beszúrások</h2>
+                    <div class="procedures-grid">
+                        <button class="btn-procedure" onclick="generateInjection('algopyrin')">Algopyrin (fájdalomcs.)</button>
+                        <button class="btn-procedure" onclick="generateInjection('morphine')">Morphine (erős fájd.cs.)</button>
+                        <button class="btn-procedure" onclick="generateInjection('lidocain')">Lidocain (érzéstelenítő)</button>
+                        <button class="btn-procedure" onclick="generateInjection('exacyl')">Exacyl (véralvadás)</button>
+                        <button class="btn-procedure" onclick="generateInjection('arterenol')">Arterenol (vérnyomás)</button>
+                        <button class="btn-procedure" onclick="generateInjection('tonogen')">Tonogen (adrenalin)</button>
                     </div>
                 </div>
 
@@ -1943,6 +1955,109 @@
             } else {
                 warningBox.classList.add('hidden');
             }
+        }
+
+        // ==================== BESZÚRÁSOK (INJECTIONS) ====================
+        const INJECTIONS = {
+            algopyrin: {
+                name: "Algopyrin",
+                method: "intramuszkulárisan",
+                steps: [
+                    { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt a táskájából" },
+                    { type: "me", text: "felszívja a {dose}-ot a fecskendőbe" },
+                    { type: "me", text: "alkoholos vattatamponnal fertőtleníti a szúrás helyét" },
+                    { type: "me", text: "beadja az Algopyrin injekciót intramuszkulárisan" },
+                    { type: "do", text: "A fájdalomcsillapító beadva, hatása 10-15 perc múlva jelentkezik." }
+                ]
+            },
+            morphine: {
+                name: "Morphine",
+                method: "intravénásan",
+                steps: [
+                    { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt" },
+                    { type: "me", text: "felszívja a {dose}-ot a fecskendőbe" },
+                    { type: "me", text: "alkoholos vattatamponnal fertőtleníti a szúrás helyét" },
+                    { type: "me", text: "beadja a Morphine-t intravénásan a fájdalom csillapítására" },
+                    { type: "do", text: "Az erős fájdalomcsillapító beadva, a beteg fájdalma csökken." }
+                ]
+            },
+            lidocain: {
+                name: "Lidocain",
+                method: "lokálisan",
+                steps: [
+                    { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt" },
+                    { type: "me", text: "felszívja a {dose}-t a fecskendőbe" },
+                    { type: "me", text: "a sérülés környékén több ponton beadja a helyi érzéstelenítőt" },
+                    { type: "do", text: "Az érzéstelenítő beadva, a terület zsibbadni kezd." }
+                ]
+            },
+            exacyl: {
+                name: "Exacyl",
+                method: "intravénásan",
+                steps: [
+                    { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt" },
+                    { type: "me", text: "felszívja a {dose}-ot a fecskendőbe" },
+                    { type: "me", text: "beadja az Exacyl-t intravénásan a véralvadás segítésére" },
+                    { type: "do", text: "A véralvadást segítő szer beadva." }
+                ]
+            },
+            arterenol: {
+                name: "Arterenol",
+                method: "intravénásan",
+                steps: [
+                    { type: "me", text: "elővesz egy Arterenol ampullát és egy fecskendőt" },
+                    { type: "me", text: "felszívja a {dose}-ot a fecskendőbe" },
+                    { type: "me", text: "beadja az Arterenol-t intravénásan a vérnyomás stabilizálására" },
+                    { type: "do", text: "A vérnyomás emelő szer beadva, a beteg keringése stabilizálódik." }
+                ]
+            },
+            tonogen: {
+                name: "Tonogen",
+                method: "intravénásan",
+                steps: [
+                    { type: "me", text: "elővesz egy Tonogen (adrenalin) ampullát és egy fecskendőt" },
+                    { type: "me", text: "felszívja a {dose}-ot a fecskendőbe" },
+                    { type: "me", text: "beadja a Tonogen-t intravénásan" },
+                    { type: "do", text: "Az adrenalin beadva, a beteg szívműködése és keringése javul." }
+                ]
+            }
+        };
+
+        function generateInjection(drugId) {
+            const injection = INJECTIONS[drugId];
+            if (!injection) {
+                alert('Ismeretlen gyógyszer!');
+                return;
+            }
+
+            const dose = getDosage(drugId, currentSeverity);
+            if (!dose) {
+                alert(`A ${injection.name} ennél a súlyosságnál (${currentSeverity}) nem alkalmazható!`);
+                return;
+            }
+
+            const patientName = document.getElementById('patientName').value.trim();
+
+            const context = {
+                patientName: patientName || null,
+                bodyPart: '',
+                bodyPartOn: '',
+                bodyPartAround: '',
+                severity: currentSeverity
+            };
+
+            const lines = [];
+
+            for (const step of injection.steps) {
+                let text = step.text.replace(/{dose}/g, dose);
+                text = processTemplate(text, context);
+                lines.push({
+                    type: step.type,
+                    text: `/${step.type} ${text}`
+                });
+            }
+
+            renderOutput(lines);
         }
 
         function toggleMedications() {
