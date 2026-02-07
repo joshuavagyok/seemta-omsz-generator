@@ -617,7 +617,8 @@
                         <select id="injuryType">
                             <option value="">-- Válassz sérülés típust --</option>
                             <optgroup label="Sebek">
-                                <option value="feluleti_seb">🩹 Felületi seb (horzsolás, vágás)</option>
+                                <option value="horzsolas">🩹 Horzsolás (felületi seb)</option>
+                                <option value="vagas">🔪 Vágás (vágott seb)</option>
                                 <option value="zuzodas">🟣 Zúzódás</option>
                             </optgroup>
                             <optgroup label="Izom/Ízület">
@@ -855,33 +856,80 @@
             },
 
             injuries: {
-                feluleti_seb: {
-                    name: "Felületi seb",
+                horzsolas: {
+                    name: "Horzsolás",
                     requiresBodyPart: true,
                     protocols: {
                         helyszin: [
                             { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
                             { type: "do", text: "A sérült {bodyPartOn} {woundDesc} látható." },
                             { type: "me", text: "előveszi a betadine-t és egy steril mull lapot a táskájából" },
-                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal megtisztítja a sebet a törmeléktől és alvadéktól" },
-                            { type: "me", text: "elővesz egy újabb steril mull lapot és lefedi vele a sebet" },
-                            { type: "me", text: "előkészíti a mullpólyát, majd körkörösen rögzíti a kötést a sérült {bodyPartAround}" },
-                            { type: "do", text: "A seb ellátva, a kötés stabilan rögzítve." }
+                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal óvatosan megtisztítja a horzsolást" },
+                            { type: "me", text: "sebtapaszt helyez a horzsolásra", severity: ["enyhe"] },
+                            { type: "me", text: "steril mull lappal lefedi a horzsolást", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "mullpólyával rögzíti a kötést a sérült {bodyPartAround}", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "elővesz egy Algopyrin ampullát és egy fecskendőt, felszívja a {algopyrinDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja a fájdalomcsillapítót intramuszkulárisan", severity: ["sulyos"] },
+                            { type: "do", text: "A horzsolás ellátva." }
                         ],
                         korhaz: [
                             { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
                             { type: "do", text: "A sérült {bodyPartOn} {woundDesc} látható." },
                             { type: "me", text: "előveszi a betadine-t és egy steril mull lapot" },
-                            { type: "me", text: "megtisztítja a sebet a fertőtlenítővel átitatott lappal" },
-                            { type: "me", text: "steril mull lappal lefedi a sebet" },
-                            { type: "me", text: "mullpólyával rögzíti a kötést" },
-                            { type: "do", text: "A seb ellátva, a kötés stabilan rögzítve." }
+                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal megtisztítja a horzsolást" },
+                            { type: "me", text: "sebtapaszt helyez a horzsolásra", severity: ["enyhe"] },
+                            { type: "me", text: "steril mull lappal lefedi a horzsolást", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "mullpólyával rögzíti a kötést", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "A horzsolás ellátva." }
                         ]
                     },
                     woundDescriptions: {
-                        enyhe: ["kisebb horzsolás", "felületi karcolás", "enyhe vágás"],
-                        kozepes: ["közepes mélységű vágás", "vérzéses sérülés", "látható seb"],
-                        sulyos: ["mély vágás", "súlyos sérülés", "nagy kiterjedésű seb"]
+                        enyhe: ["kisebb karcolás", "enyhe horzsolás", "felületi bőrsérülés"],
+                        kozepes: ["nagyobb horzsolás, a bőr kipirult és sérült", "kiterjedtebb felületi seb"],
+                        sulyos: ["nagy kiterjedésű, mély horzsolás", "súlyos felületi sérülés, a bőr több rétege sérült"]
+                    }
+                },
+
+                vagas: {
+                    name: "Vágás",
+                    requiresBodyPart: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} {woundDesc} látható, {cutDesc}." },
+                            { type: "me", text: "előveszi a betadine-t és steril mull lapokat a táskájából" },
+                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal megtisztítja a vágást" },
+                            { type: "me", text: "direkt nyomást alkalmaz a seben a vérzés csillapítására", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt, felszívja a {lidocainDose}-t", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "beadja a helyi érzéstelenítőt a seb mellé", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "steril mull lappal lefedi a sebet" },
+                            { type: "me", text: "mullpólyával rögzíti a kötést a sérült {bodyPartAround}" },
+                            { type: "do", text: "A sérültet kórházba kell szállítani, a seb varrást igényel!", severity: ["sulyos"] },
+                            { type: "do", text: "A vágás ellátva, a kötés stabilan rögzítve.", severity: ["enyhe", "kozepes"] }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérült {bodyPart} és szabaddá teszi a ruházattól" },
+                            { type: "do", text: "A sérült {bodyPartOn} {woundDesc} látható, {cutDesc}." },
+                            { type: "me", text: "előveszi a betadine-t és steril mull lapokat" },
+                            { type: "me", text: "a fertőtlenítővel átitatott mull lappal megtisztítja a vágást" },
+                            { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt, felszívja a {lidocainDose}-t", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "beadja a helyi érzéstelenítőt a seb környékére", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "felveszi a steril kesztyűt", severity: ["sulyos"] },
+                            { type: "me", text: "tűfogóval és tűvel összezárja a sebet", severity: ["sulyos"] },
+                            { type: "me", text: "fertőtleníti és bekötözi a sebet" },
+                            { type: "do", text: "A seb ellátva, varratokkal zárva.", severity: ["sulyos"] },
+                            { type: "do", text: "A vágás ellátva, a kötés stabilan rögzítve.", severity: ["enyhe", "kozepes"] }
+                        ]
+                    },
+                    woundDescriptions: {
+                        enyhe: ["felületi vágás", "kisebb vágott seb", "enyhe vágás"],
+                        kozepes: ["közepes mélységű vágás, mérsékelt vérzéssel", "vágott seb, a vér egyenletesen folyik"],
+                        sulyos: ["mély vágás, erős vérzéssel", "súlyos vágott seb, a szövet mélyebb rétegei is sérültek"]
+                    },
+                    cutDescriptions: {
+                        enyhe: ["a sebszélek tiszták", "a sebszélek simák"],
+                        kozepes: ["a sebszélek szétnyílnak", "a seb mélyebb rétegeket is érint"],
+                        sulyos: ["a sebszélek erősen szétnyílnak, mély szöveti sérülés", "a seb mélyen az izomszövetig ér"]
                     }
                 },
 
@@ -1455,6 +1503,7 @@
             result = result.replace(/{bodyPartOn}/g, context.bodyPartOn || '');
             result = result.replace(/{bodyPartAround}/g, context.bodyPartAround || '');
             result = result.replace(/{woundDesc}/g, context.woundDesc || '');
+            result = result.replace(/{cutDesc}/g, context.cutDesc || '');
             result = result.replace(/{bruiseDesc}/g, context.bruiseDesc || '');
             result = result.replace(/{strainDesc}/g, context.strainDesc || '');
             result = result.replace(/{sprainDesc}/g, context.sprainDesc || '');
@@ -1560,6 +1609,7 @@
                 vitals: vitals,
                 severity: currentSeverity,
                 woundDesc: injury.woundDescriptions ? randomChoice(injury.woundDescriptions[currentSeverity]) : '',
+                cutDesc: injury.cutDescriptions ? randomChoice(injury.cutDescriptions[currentSeverity]) : '',
                 bruiseDesc: injury.bruiseDescriptions ? randomChoice(injury.bruiseDescriptions[currentSeverity]) : '',
                 strainDesc: injury.strainDescriptions ? randomChoice(injury.strainDescriptions[currentSeverity]) : '',
                 sprainDesc: injury.sprainDescriptions ? randomChoice(injury.sprainDescriptions[currentSeverity]) : '',
