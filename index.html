@@ -526,6 +526,82 @@
             opacity: 0;
         }
 
+        /* Sérülés slot-ok */
+        .injury-slots-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .injury-slot {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .injury-slot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .btn-remove-injury {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .btn-remove-injury:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .injury-slot select {
+            margin-bottom: 8px;
+        }
+
+        .btn-add-injury {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 2px dashed var(--success);
+            color: var(--success);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-add-injury:hover {
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .injury-divider {
+            text-align: center;
+            color: var(--accent);
+            font-weight: 600;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-top: 1px dashed var(--border);
+            border-bottom: 1px dashed var(--border);
+            margin: 8px 0;
+        }
+
         .warning {
             background: rgba(251, 191, 36, 0.2);
             border: 1px solid var(--warning);
@@ -613,39 +689,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Sérülés típusa</label>
-                        <select id="injuryType">
-                            <option value="">-- Válassz sérülés típust --</option>
-                            <optgroup label="Sebek">
-                                <option value="horzsolas">🩹 Horzsolás (felületi seb)</option>
-                                <option value="vagas">🔪 Vágás (vágott seb)</option>
-                                <option value="zuzodas">🟣 Zúzódás</option>
-                            </optgroup>
-                            <optgroup label="Izom/Ízület">
-                                <option value="huzodas">💪 Húzódás</option>
-                                <option value="randulas">🦵 Rándulás</option>
-                                <option value="ficam">🔄 Ficam</option>
-                            </optgroup>
-                            <optgroup label="Vérzések">
-                                <option value="verzes_kapillaris">🩸 Kapilláris (hajszáleres) vérzés</option>
-                                <option value="verzes_venas">🩸 Vénás (gyűjtőeres) vérzés</option>
-                                <option value="verzes_arterias">🩸 Artériás (ütőeres) vérzés</option>
-                            </optgroup>
-                            <optgroup label="Törések">
-                                <option value="tores_zart">🦴 Zárt törés</option>
-                                <option value="tores_nyilt">🦴 Nyílt törés</option>
-                            </optgroup>
-                            <optgroup label="Trauma">
-                                <option value="lott_serules">💥 Lőtt sérülés</option>
-                                <option value="athatolo_serules">🔪 Áthatoló sérülés (szúrt/vágott)</option>
-                            </optgroup>
-                            <optgroup label="Kritikus">
-                                <option value="ajulas">😵 Ájulás / Eszméletvesztés</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
                         <label>Súlyosság</label>
                         <div class="button-group" id="severityGroup">
                             <button class="btn-option active" data-value="enyhe">Enyhe</button>
@@ -662,43 +705,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="bodyPartGroup">
-                        <label>Testrész</label>
-                        <select id="bodyPart">
-                            <option value="">-- Válassz testrészt --</option>
-                            <optgroup label="Felső végtag">
-                                <option value="bal_kar">Bal kar</option>
-                                <option value="jobb_kar">Jobb kar</option>
-                                <option value="bal_kez">Bal kéz</option>
-                                <option value="jobb_kez">Jobb kéz</option>
-                                <option value="bal_vall">Bal váll</option>
-                                <option value="jobb_vall">Jobb váll</option>
-                                <option value="bal_konyok">Bal könyök</option>
-                                <option value="jobb_konyok">Jobb könyök</option>
-                                <option value="bal_csuklo">Bal csukló</option>
-                                <option value="jobb_csuklo">Jobb csukló</option>
-                            </optgroup>
-                            <optgroup label="Alsó végtag">
-                                <option value="bal_lab">Bal láb</option>
-                                <option value="jobb_lab">Jobb láb</option>
-                                <option value="bal_comb">Bal comb</option>
-                                <option value="jobb_comb">Jobb comb</option>
-                                <option value="bal_terd">Bal térd</option>
-                                <option value="jobb_terd">Jobb térd</option>
-                                <option value="bal_boka">Bal boka</option>
-                                <option value="jobb_boka">Jobb boka</option>
-                            </optgroup>
-                            <optgroup label="Törzs">
-                                <option value="mellkas">Mellkas</option>
-                                <option value="has">Has</option>
-                                <option value="hat">Hát</option>
-                            </optgroup>
-                            <optgroup label="Fej">
-                                <option value="fej">Fej</option>
-                                <option value="arc">Arc</option>
-                            </optgroup>
-                        </select>
+                    <div id="injurySlotsContainer" class="injury-slots-container">
+                        <!-- Első slot dinamikusan generálódik JS-ből -->
                     </div>
+                    <button class="btn-add-injury" onclick="addInjurySlot()">+ Sérülés hozzáadása</button>
 
                     <div id="warningBox" class="warning hidden"></div>
 
@@ -1551,13 +1561,200 @@
             });
         }
 
-        function updateLocationWarnings() {
-            const warningBox = document.getElementById('warningBox');
-            const injuryType = document.getElementById('injuryType').value;
+        // ==================== INJURY SLOT MANAGEMENT ====================
+        let injurySlotCount = 0;
+
+        function getInjuryTypeOptions() {
+            return `
+                <option value="">-- Válassz sérülés típust --</option>
+                <optgroup label="Sebek">
+                    <option value="horzsolas">🩹 Horzsolás (felületi seb)</option>
+                    <option value="vagas">🔪 Vágás (vágott seb)</option>
+                    <option value="zuzodas">🟣 Zúzódás</option>
+                </optgroup>
+                <optgroup label="Izom/Ízület">
+                    <option value="huzodas">💪 Húzódás</option>
+                    <option value="randulas">🦵 Rándulás</option>
+                    <option value="ficam">🔄 Ficam</option>
+                </optgroup>
+                <optgroup label="Vérzések">
+                    <option value="verzes_kapillaris">🩸 Kapilláris (hajszáleres) vérzés</option>
+                    <option value="verzes_venas">🩸 Vénás (gyűjtőeres) vérzés</option>
+                    <option value="verzes_arterias">🩸 Artériás (ütőeres) vérzés</option>
+                </optgroup>
+                <optgroup label="Törések">
+                    <option value="tores_zart">🦴 Zárt törés</option>
+                    <option value="tores_nyilt">🦴 Nyílt törés</option>
+                </optgroup>
+                <optgroup label="Trauma">
+                    <option value="lott_serules">💥 Lőtt sérülés</option>
+                    <option value="athatolo_serules">🔪 Áthatoló sérülés (szúrt/vágott)</option>
+                </optgroup>
+                <optgroup label="Kritikus">
+                    <option value="ajulas">😵 Ájulás / Eszméletvesztés</option>
+                </optgroup>
+            `;
+        }
+
+        function getBodyPartOptions() {
+            return `
+                <option value="">-- Válassz testrészt --</option>
+                <optgroup label="Felső végtag">
+                    <option value="bal_kar">Bal kar</option>
+                    <option value="jobb_kar">Jobb kar</option>
+                    <option value="bal_kez">Bal kéz</option>
+                    <option value="jobb_kez">Jobb kéz</option>
+                    <option value="bal_vall">Bal váll</option>
+                    <option value="jobb_vall">Jobb váll</option>
+                    <option value="bal_konyok">Bal könyök</option>
+                    <option value="jobb_konyok">Jobb könyök</option>
+                    <option value="bal_csuklo">Bal csukló</option>
+                    <option value="jobb_csuklo">Jobb csukló</option>
+                </optgroup>
+                <optgroup label="Alsó végtag">
+                    <option value="bal_lab">Bal láb</option>
+                    <option value="jobb_lab">Jobb láb</option>
+                    <option value="bal_comb">Bal comb</option>
+                    <option value="jobb_comb">Jobb comb</option>
+                    <option value="bal_terd">Bal térd</option>
+                    <option value="jobb_terd">Jobb térd</option>
+                    <option value="bal_boka">Bal boka</option>
+                    <option value="jobb_boka">Jobb boka</option>
+                </optgroup>
+                <optgroup label="Törzs">
+                    <option value="mellkas">Mellkas</option>
+                    <option value="has">Has</option>
+                    <option value="hat">Hát</option>
+                </optgroup>
+                <optgroup label="Fej">
+                    <option value="fej">Fej</option>
+                    <option value="arc">Arc</option>
+                </optgroup>
+            `;
+        }
+
+        function addInjurySlot() {
+            const container = document.getElementById('injurySlotsContainer');
+            const slots = container.querySelectorAll('.injury-slot');
+
+            if (slots.length >= 5) {
+                alert('Maximum 5 sérülés adható hozzá!');
+                return;
+            }
+
+            injurySlotCount++;
+            const index = injurySlotCount;
+            const slotNumber = slots.length + 1;
+
+            const slotDiv = document.createElement('div');
+            slotDiv.className = 'injury-slot';
+            slotDiv.dataset.index = index;
+            slotDiv.innerHTML = `
+                <div class="injury-slot-header">
+                    <span>${slotNumber}. sérülés</span>
+                    <button class="btn-remove-injury" onclick="removeInjurySlot(${index})" title="Eltávolítás">✕</button>
+                </div>
+                <select class="injury-select" onchange="onSlotInjuryChange(this)">
+                    ${getInjuryTypeOptions()}
+                </select>
+                <div class="bodypart-group">
+                    <select class="bodypart-select">
+                        ${getBodyPartOptions()}
+                    </select>
+                </div>
+            `;
+
+            container.appendChild(slotDiv);
+            updateSlotNumbers();
+            updateAddButton();
+        }
+
+        function removeInjurySlot(index) {
+            const container = document.getElementById('injurySlotsContainer');
+            const slots = container.querySelectorAll('.injury-slot');
+
+            if (slots.length <= 1) return;
+
+            const slot = container.querySelector(`.injury-slot[data-index="${index}"]`);
+            if (slot) {
+                slot.remove();
+                updateSlotNumbers();
+                updateAddButton();
+            }
+        }
+
+        function updateSlotNumbers() {
+            const container = document.getElementById('injurySlotsContainer');
+            const slots = container.querySelectorAll('.injury-slot');
+            slots.forEach((slot, i) => {
+                const header = slot.querySelector('.injury-slot-header span');
+                header.textContent = `${i + 1}. sérülés`;
+                const removeBtn = slot.querySelector('.btn-remove-injury');
+                if (slots.length <= 1) {
+                    removeBtn.style.display = 'none';
+                } else {
+                    removeBtn.style.display = '';
+                }
+            });
+        }
+
+        function updateAddButton() {
+            const container = document.getElementById('injurySlotsContainer');
+            const slots = container.querySelectorAll('.injury-slot');
+            const addBtn = document.querySelector('.btn-add-injury');
+            if (slots.length >= 5) {
+                addBtn.style.display = 'none';
+            } else {
+                addBtn.style.display = '';
+            }
+        }
+
+        function onSlotInjuryChange(selectEl) {
+            const slot = selectEl.closest('.injury-slot');
+            const bodyPartGroup = slot.querySelector('.bodypart-group');
+            const injuryType = selectEl.value;
             const injury = MEDICAL_DATA.injuries[injuryType];
 
-            if (injury && injury.isCritical && currentLocation === 'helyszin') {
-                warningBox.textContent = 'Figyelem: Ez súlyos sérülés, kórházi ellátás javasolt!';
+            if (injury && !injury.requiresBodyPart) {
+                bodyPartGroup.style.display = 'none';
+            } else {
+                bodyPartGroup.style.display = '';
+            }
+
+            updateLocationWarnings();
+        }
+
+        function getInjurySlots() {
+            const container = document.getElementById('injurySlotsContainer');
+            const slots = container.querySelectorAll('.injury-slot');
+            const result = [];
+
+            slots.forEach(slot => {
+                const injuryType = slot.querySelector('.injury-select').value;
+                const bodyPart = slot.querySelector('.bodypart-select').value;
+                if (injuryType) {
+                    result.push({ injuryType, bodyPart });
+                }
+            });
+
+            return result;
+        }
+
+        function updateLocationWarnings() {
+            const warningBox = document.getElementById('warningBox');
+            const slots = getInjurySlots();
+            let hasCritical = false;
+
+            for (const slot of slots) {
+                const injury = MEDICAL_DATA.injuries[slot.injuryType];
+                if (injury && injury.isCritical && currentLocation === 'helyszin') {
+                    hasCritical = true;
+                    break;
+                }
+            }
+
+            if (hasCritical) {
+                warningBox.textContent = 'Figyelem: Súlyos sérülés van a listában, kórházi ellátás javasolt!';
                 warningBox.classList.remove('hidden');
             } else {
                 warningBox.classList.add('hidden');
@@ -1573,70 +1770,74 @@
 
         // ==================== GENERATION FUNCTIONS ====================
         function generateRP() {
-            const injuryType = document.getElementById('injuryType').value;
-            const bodyPartId = document.getElementById('bodyPart').value;
+            const slots = getInjurySlots();
 
-            if (!injuryType) {
-                alert('Kérlek válassz sérülés típust!');
+            if (slots.length === 0) {
+                alert('Kérlek válassz legalább egy sérülés típust!');
                 return;
             }
 
-            const injury = MEDICAL_DATA.injuries[injuryType];
-
-            if (injury.requiresBodyPart && !bodyPartId) {
-                alert('Kérlek válassz testrészt!');
-                return;
+            for (let i = 0; i < slots.length; i++) {
+                const injury = MEDICAL_DATA.injuries[slots[i].injuryType];
+                if (injury.requiresBodyPart && !slots[i].bodyPart) {
+                    alert(`Kérlek válassz testrészt a ${i + 1}. sérüléshez!`);
+                    return;
+                }
             }
-
-            const protocol = injury.protocols[currentLocation];
-            if (!protocol) {
-                alert('Ez a sérülés típus nem elérhető ezen a helyszínen.');
-                return;
-            }
-
-            const vitals = generateVitals(currentSeverity);
-            const bodyPart = MEDICAL_DATA.bodyParts[bodyPartId] || '';
-            const bodyPartOn = MEDICAL_DATA.bodyPartsOn[bodyPartId] || '';
-            const bodyPartAround = MEDICAL_DATA.bodyPartsAround[bodyPartId] || '';
 
             const patientName = document.getElementById('patientName').value.trim();
+            const vitals = generateVitals(currentSeverity);
+            const allLines = [];
 
-            const context = {
-                patientName: patientName || null,
-                bodyPart: bodyPart,
-                bodyPartOn: bodyPartOn,
-                bodyPartAround: bodyPartAround,
-                vitals: vitals,
-                severity: currentSeverity,
-                woundDesc: injury.woundDescriptions ? randomChoice(injury.woundDescriptions[currentSeverity]) : '',
-                cutDesc: injury.cutDescriptions ? randomChoice(injury.cutDescriptions[currentSeverity]) : '',
-                bruiseDesc: injury.bruiseDescriptions ? randomChoice(injury.bruiseDescriptions[currentSeverity]) : '',
-                strainDesc: injury.strainDescriptions ? randomChoice(injury.strainDescriptions[currentSeverity]) : '',
-                sprainDesc: injury.sprainDescriptions ? randomChoice(injury.sprainDescriptions[currentSeverity]) : '',
-                kemResult: injury.kemResults ? randomChoice(injury.kemResults[currentSeverity]) : '',
-                bleedResult: injury.bleedResults ? randomChoice(injury.bleedResults[currentSeverity]) : '',
-                arterialResult: injury.arterialResults ? randomChoice(injury.arterialResults[currentSeverity]) : '',
-                hospitalNote: injury.hospitalNotes ? injury.hospitalNotes[currentSeverity] : '',
-                repoResult: currentSeverity === 'sulyos' ? 'sikertelen, kórházi ellátás szükséges' : 'sikeres',
-                breathing: injury.breathingDescriptions ? randomChoice(injury.breathingDescriptions[currentSeverity]) : '',
-                condition: injury.conditionResults ? randomChoice(injury.conditionResults[currentSeverity]) : ''
-            };
+            for (let i = 0; i < slots.length; i++) {
+                const slot = slots[i];
+                const injury = MEDICAL_DATA.injuries[slot.injuryType];
+                const bodyPartId = slot.bodyPart;
 
-            const lines = [];
-
-            for (const step of protocol) {
-                if (step.severity && !step.severity.includes(currentSeverity)) {
-                    continue;
+                const protocol = injury.protocols[currentLocation];
+                if (!protocol) {
+                    alert(`A ${i + 1}. sérülés (${injury.name || slot.injuryType}) nem elérhető ezen a helyszínen.`);
+                    return;
                 }
 
-                const processedText = processTemplate(step.text, context);
-                lines.push({
-                    type: step.type,
-                    text: `/${step.type} ${processedText}`
-                });
+                if (i > 0) {
+                    allLines.push({ type: 'divider', text: `--- ${i + 1}. sérülés ellátása ---` });
+                }
+
+                const context = {
+                    patientName: patientName || null,
+                    bodyPart: MEDICAL_DATA.bodyParts[bodyPartId] || '',
+                    bodyPartOn: MEDICAL_DATA.bodyPartsOn[bodyPartId] || '',
+                    bodyPartAround: MEDICAL_DATA.bodyPartsAround[bodyPartId] || '',
+                    vitals: vitals,
+                    severity: currentSeverity,
+                    woundDesc: injury.woundDescriptions ? randomChoice(injury.woundDescriptions[currentSeverity]) : '',
+                    cutDesc: injury.cutDescriptions ? randomChoice(injury.cutDescriptions[currentSeverity]) : '',
+                    bruiseDesc: injury.bruiseDescriptions ? randomChoice(injury.bruiseDescriptions[currentSeverity]) : '',
+                    strainDesc: injury.strainDescriptions ? randomChoice(injury.strainDescriptions[currentSeverity]) : '',
+                    sprainDesc: injury.sprainDescriptions ? randomChoice(injury.sprainDescriptions[currentSeverity]) : '',
+                    kemResult: injury.kemResults ? randomChoice(injury.kemResults[currentSeverity]) : '',
+                    bleedResult: injury.bleedResults ? randomChoice(injury.bleedResults[currentSeverity]) : '',
+                    arterialResult: injury.arterialResults ? randomChoice(injury.arterialResults[currentSeverity]) : '',
+                    hospitalNote: injury.hospitalNotes ? injury.hospitalNotes[currentSeverity] : '',
+                    repoResult: currentSeverity === 'sulyos' ? 'sikertelen, kórházi ellátás szükséges' : 'sikeres',
+                    breathing: injury.breathingDescriptions ? randomChoice(injury.breathingDescriptions[currentSeverity]) : '',
+                    condition: injury.conditionResults ? randomChoice(injury.conditionResults[currentSeverity]) : ''
+                };
+
+                for (const step of protocol) {
+                    if (step.severity && !step.severity.includes(currentSeverity)) {
+                        continue;
+                    }
+                    const processedText = processTemplate(step.text, context);
+                    allLines.push({
+                        type: step.type,
+                        text: `/${step.type} ${processedText}`
+                    });
+                }
             }
 
-            renderOutput(lines);
+            renderOutput(allLines);
         }
 
         function generateProcedure(procedureId) {
@@ -1696,6 +1897,10 @@
             let html = '';
 
             rpLines.forEach((line, index) => {
+                if (line.type === 'divider') {
+                    html += `<div class="injury-divider animated" style="animation-delay: ${index * 0.1}s">${escapeHtml(line.text)}</div>`;
+                    return;
+                }
                 const lineClass = line.type === 'me' ? 'me-line' : 'do-line';
                 const severityClass = 'severity-' + currentSeverity;
                 html += `
@@ -1717,12 +1922,35 @@
                 return;
             }
 
+            // Skip divider lines in RP mode - show them as header but auto-advance
+            if (rpLines[rpCurrentIndex].type === 'divider') {
+                if (rpCurrentIndex < rpLines.length - 1) {
+                    rpCurrentIndex++;
+                    renderRpMode();
+                    return;
+                }
+            }
+
             const line = rpLines[rpCurrentIndex];
             const isLast = rpCurrentIndex >= rpLines.length - 1;
             const severityClass = 'severity-' + currentSeverity;
 
+            // Count only non-divider lines for the counter
+            const totalReal = rpLines.filter(l => l.type !== 'divider').length;
+            const currentReal = rpLines.slice(0, rpCurrentIndex + 1).filter(l => l.type !== 'divider').length;
+
+            // Check if this line belongs to a specific injury (find preceding divider)
+            let injuryHeader = '';
+            for (let i = rpCurrentIndex - 1; i >= 0; i--) {
+                if (rpLines[i].type === 'divider') {
+                    injuryHeader = `<div class="injury-divider" style="margin-bottom:10px">${escapeHtml(rpLines[i].text)}</div>`;
+                    break;
+                }
+            }
+
             let html = `
-                <div class="rp-counter">${rpCurrentIndex + 1} / ${rpLines.length} sor</div>
+                <div class="rp-counter">${currentReal} / ${totalReal} sor</div>
+                ${injuryHeader}
                 <div class="rp-current-line ${severityClass}">
                     <span class="line-text">${escapeHtml(line.text)}</span>
                     <button class="btn-rp-next" onclick="rpCopyAndNext()">
@@ -1770,6 +1998,10 @@
         function rpPrev() {
             if (rpCurrentIndex > 0) {
                 rpCurrentIndex--;
+                // Skip divider lines when going back
+                while (rpCurrentIndex > 0 && rpLines[rpCurrentIndex].type === 'divider') {
+                    rpCurrentIndex--;
+                }
                 renderRpMode();
             }
         }
@@ -1823,19 +2055,7 @@
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
             setupButtonGroups();
-
-            document.getElementById('injuryType').addEventListener('change', function() {
-                updateLocationWarnings();
-
-                const injury = MEDICAL_DATA.injuries[this.value];
-                const bodyPartGroup = document.getElementById('bodyPartGroup');
-
-                if (injury && !injury.requiresBodyPart) {
-                    bodyPartGroup.classList.add('hidden');
-                } else {
-                    bodyPartGroup.classList.remove('hidden');
-                }
-            });
+            addInjurySlot();
         });
     </script>
 </body>
