@@ -65,6 +65,120 @@
             }
         }
 
+        /* Telefon landscape mód */
+        @media (orientation: landscape) and (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 2fr 3fr;
+                gap: 10px;
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+                margin-bottom: 2px;
+            }
+
+            header p {
+                font-size: 0.85rem;
+            }
+
+            header {
+                margin-bottom: 10px;
+            }
+
+            .card {
+                padding: 12px;
+            }
+
+            .card h2 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+
+            .form-group {
+                margin-bottom: 10px;
+            }
+
+            .form-group label {
+                margin-bottom: 4px;
+                font-size: 0.85rem;
+            }
+
+            select {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            .btn-option {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .btn-generate {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                margin-top: 5px;
+            }
+
+            .procedures-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 6px;
+                margin-top: 8px;
+            }
+
+            .btn-procedure {
+                padding: 8px 6px;
+                font-size: 0.75rem;
+            }
+
+            .generated-line {
+                padding: 8px 10px;
+                margin: 4px 0;
+            }
+
+            .line-text {
+                font-size: 0.85rem;
+            }
+
+            .right-panel {
+                position: sticky;
+                top: 10px;
+                max-height: calc(100vh - 20px);
+                overflow-y: auto;
+            }
+        }
+
+        /* Telefon portrait mód - nagyobb gombok */
+        @media (orientation: portrait) and (max-width: 600px) {
+            .btn-option {
+                padding: 12px 16px;
+                font-size: 1rem;
+            }
+
+            .btn-procedure {
+                padding: 14px 10px;
+                font-size: 0.9rem;
+            }
+
+            .btn-generate {
+                padding: 16px 30px;
+                font-size: 1.15rem;
+            }
+
+            .generated-line {
+                padding: 14px 12px;
+            }
+
+            .btn-copy {
+                padding: 10px 14px;
+                min-width: 50px;
+            }
+        }
+
         .card {
             background: var(--bg-card);
             border-radius: 12px;
@@ -132,6 +246,35 @@
             background: var(--accent);
             border-color: var(--accent);
             color: white;
+        }
+
+        /* Súlyossági színek */
+        #severityGroup .btn-option[data-value="enyhe"].active {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        #severityGroup .btn-option[data-value="kozepes"].active {
+            background: var(--warning);
+            border-color: var(--warning);
+            color: #1a1a2e;
+        }
+
+        #severityGroup .btn-option[data-value="sulyos"].active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .generated-line.severity-enyhe {
+            border-left-color: var(--success);
+        }
+
+        .generated-line.severity-kozepes {
+            border-left-color: var(--warning);
+        }
+
+        .generated-line.severity-sulyos {
+            border-left-color: var(--accent);
         }
 
         .btn-generate {
@@ -280,6 +423,109 @@
             display: none !important;
         }
 
+        /* RP mód */
+        .rp-mode-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-rp-mode {
+            padding: 8px 16px;
+            background: transparent;
+            border: 2px solid var(--success);
+            color: var(--success);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-rp-mode:hover {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-rp-mode.active {
+            background: var(--success);
+            color: white;
+        }
+
+        .rp-counter {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .rp-current-line {
+            background: rgba(0,0,0,0.4);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .rp-current-line .line-text {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .btn-rp-next {
+            padding: 14px 30px;
+            background: var(--success);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-rp-next:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-rp-prev {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .btn-rp-prev:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        /* Animált generálás */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .generated-line.animated {
+            animation: slideIn 0.3s ease-out forwards;
+            opacity: 0;
+        }
+
         .warning {
             background: rgba(251, 191, 36, 0.2);
             border: 1px solid var(--warning);
@@ -362,32 +608,38 @@
                     <h2>Sérülés beállítások</h2>
 
                     <div class="form-group">
+                        <label>Beteg neve (opcionális)</label>
+                        <input type="text" id="patientName" placeholder="pl. Kiss János" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:8px;background:var(--bg-secondary);color:var(--text-primary);font-size:1rem;">
+                    </div>
+
+                    <div class="form-group">
                         <label>Sérülés típusa</label>
                         <select id="injuryType">
                             <option value="">-- Válassz sérülés típust --</option>
                             <optgroup label="Sebek">
-                                <option value="feluleti_seb">Felületi seb (horzsolás, vágás)</option>
-                                <option value="zuzodas">Zúzódás</option>
+                                <option value="feluleti_seb">🩹 Felületi seb (horzsolás, vágás)</option>
+                                <option value="zuzodas">🟣 Zúzódás</option>
                             </optgroup>
                             <optgroup label="Izom/Ízület">
-                                <option value="huzodas">Húzódás</option>
-                                <option value="randulas">Rándulás</option>
-                                <option value="ficam">Ficam</option>
+                                <option value="huzodas">💪 Húzódás</option>
+                                <option value="randulas">🦵 Rándulás</option>
+                                <option value="ficam">🔄 Ficam</option>
                             </optgroup>
                             <optgroup label="Vérzések">
-                                <option value="verzes_kapillaris">Kapilláris (hajszáleres) vérzés</option>
-                                <option value="verzes_venas">Vénás (gyűjtőeres) vérzés</option>
-                                <option value="verzes_arterias">Artériás (ütőeres) vérzés</option>
+                                <option value="verzes_kapillaris">🩸 Kapilláris (hajszáleres) vérzés</option>
+                                <option value="verzes_venas">🩸 Vénás (gyűjtőeres) vérzés</option>
+                                <option value="verzes_arterias">🩸 Artériás (ütőeres) vérzés</option>
                             </optgroup>
                             <optgroup label="Törések">
-                                <option value="tores_zart">Zárt törés</option>
-                                <option value="tores_nyilt">Nyílt törés</option>
+                                <option value="tores_zart">🦴 Zárt törés</option>
+                                <option value="tores_nyilt">🦴 Nyílt törés</option>
                             </optgroup>
                             <optgroup label="Trauma">
-                                <option value="lott_serules">Lőtt sérülés / Áthatoló sérülés</option>
+                                <option value="lott_serules">💥 Lőtt sérülés</option>
+                                <option value="athatolo_serules">🔪 Áthatoló sérülés (szúrt/vágott)</option>
                             </optgroup>
                             <optgroup label="Kritikus">
-                                <option value="ajulas">Ájulás / Eszméletvesztés</option>
+                                <option value="ajulas">😵 Ájulás / Eszméletvesztés</option>
                             </optgroup>
                         </select>
                     </div>
@@ -493,7 +745,10 @@
                 <div class="card">
                     <div class="output-header">
                         <h2>Generált szöveg</h2>
-                        <button class="btn-copy-all" onclick="copyAll()">Összes másolása</button>
+                        <div style="display:flex;gap:8px;">
+                            <button class="btn-rp-mode" onclick="toggleRpMode()">RP mód</button>
+                            <button class="btn-copy-all" onclick="copyAll()">Összes másolása</button>
+                        </div>
                     </div>
                     <div id="output">
                         <div class="placeholder">Válassz sérülés típust és kattints a "Generálás" gombra</div>
@@ -929,29 +1184,68 @@
                     protocols: {
                         helyszin: [
                             { type: "me", text: "megvizsgálja a sérültet" },
-                            { type: "do", text: "A sérült {bodyPartOn} lőtt seb látható." },
+                            { type: "do", text: "A sérült {bodyPartOn} lőtt seb látható, a bemeneti nyílás körül vérzés." },
                             { type: "me", text: "eltávolítja a ruházatot a sérülés környékéről" },
+                            { type: "me", text: "megkeresi a kimeneti nyílást, ha van", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "Kimeneti nyílás nem található, a lövedék a testben van.", severity: ["kozepes", "sulyos"] },
                             { type: "me", text: "előkészíti a kötszert és nyomókötést helyez a sebre" },
                             { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt, felszívja a {lidocainDose}-t", severity: ["kozepes", "sulyos"] },
                             { type: "me", text: "beadja a helyi érzéstelenítőt közvetlenül a seb mellé", severity: ["kozepes", "sulyos"] },
                             { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt, felszívja a {exacylDose}-ot", severity: ["sulyos"] },
                             { type: "me", text: "beadja az Exacyl-t intravénásan a vérzés csillapítására", severity: ["sulyos"] },
-                            { type: "do", text: "A sérültet sürgősen kórházba kell szállítani!" }
+                            { type: "do", text: "A sérültet sürgősen kórházba kell szállítani, a lövedék eltávolítása szükséges!" }
                         ],
                         korhaz: [
                             { type: "me", text: "megvizsgálja a sérültet" },
-                            { type: "do", text: "Lőtt sérülés a sérült {bodyPartOn}." },
-                            { type: "me", text: "képalkotó vizsgálatra küldi" },
+                            { type: "do", text: "Lőtt sérülés a sérült {bodyPartOn}, bemeneti nyílás látható." },
+                            { type: "me", text: "képalkotó vizsgálatra küldi a lövedék lokalizálásához" },
                             { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot" },
                             { type: "me", text: "beadja a Morphine érzéstelenítést" },
                             { type: "me", text: "előkészíti az infúziós szerelést, intravénás infúziót és vérpótlást indít" },
                             { type: "me", text: "felveszi a steril kesztyűt, előkészíti a műtős felszerelést" },
                             { type: "me", text: "szikével feltárja a sebet" },
                             { type: "me", text: "sebterpesztőt helyez be" },
-                            { type: "me", text: "csipesszel eltávolítja a repeszeket és idegentesteket" },
+                            { type: "me", text: "csipesszel megkeresi és eltávolítja a lövedéket és repeszeket" },
                             { type: "me", text: "tűfogóval összezárja a sebet" },
                             { type: "me", text: "fertőtleníti és bekötözi a sebet" },
                             { type: "do", text: "A műtét sikeres, a lövedék eltávolítva." }
+                        ]
+                    }
+                },
+
+                athatolo_serules: {
+                    name: "Áthatoló sérülés",
+                    requiresBodyPart: true,
+                    isCritical: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megvizsgálja a sérültet" },
+                            { type: "do", text: "A sérült {bodyPartOn} mély szúrt seb látható, az idegentest a sebben van." },
+                            { type: "me", text: "eltávolítja a ruházatot a sérülés környékéről" },
+                            { type: "me", text: "ellenőrzi az idegentestet - NEM távolítja el, rögzíti a helyén" },
+                            { type: "me", text: "az idegentest köré kötszert helyez és rögzíti, hogy ne mozduljon el" },
+                            { type: "me", text: "nyomókötést alkalmaz a seb körül, az idegentestet nem érintve" },
+                            { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt, felszívja a {lidocainDose}-t", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "beadja a helyi érzéstelenítőt a seb mellé", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt, felszívja a {exacylDose}-ot", severity: ["sulyos"] },
+                            { type: "me", text: "beadja az Exacyl-t intravénásan a vérzés csillapítására", severity: ["sulyos"] },
+                            { type: "do", text: "A sérültet kórházba kell szállítani, az idegentest eltávolítása műtétet igényel!" }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megvizsgálja a sérültet" },
+                            { type: "do", text: "Áthatoló sérülés a sérült {bodyPartOn}, idegentest a sebben." },
+                            { type: "me", text: "képalkotó vizsgálatra küldi az idegentest pontos helyzetének meghatározásához" },
+                            { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot" },
+                            { type: "me", text: "beadja a Morphine érzéstelenítést" },
+                            { type: "me", text: "előkészíti az infúziós szerelést, intravénás infúziót és vérpótlást indít" },
+                            { type: "me", text: "felveszi a steril kesztyűt, előkészíti a műtős felszerelést" },
+                            { type: "me", text: "szikével feltárja a sebet az idegentest körül" },
+                            { type: "me", text: "sebterpesztőt helyez be" },
+                            { type: "me", text: "csipesszel óvatosan eltávolítja az idegentestet" },
+                            { type: "me", text: "ellenőrzi a seb belsejét további sérülés szempontjából" },
+                            { type: "me", text: "tűfogóval összezárja a sebet" },
+                            { type: "me", text: "fertőtleníti és bekötözi a sebet" },
+                            { type: "do", text: "A műtét sikeres, az idegentest eltávolítva, a seb ellátva." }
                         ]
                     }
                 },
@@ -1116,6 +1410,9 @@
         // ==================== STATE ====================
         let currentSeverity = 'enyhe';
         let currentLocation = 'helyszin';
+        let rpModeActive = false;
+        let rpCurrentIndex = 0;
+        let rpLines = [];
 
         // ==================== UTILITY FUNCTIONS ====================
         function randomRange(min, max) {
@@ -1145,6 +1442,14 @@
 
         function processTemplate(text, context) {
             let result = text;
+
+            // Beteg neve csere
+            if (context.patientName) {
+                result = result.replace(/a sérült /g, context.patientName + ' ');
+                result = result.replace(/A sérült /g, context.patientName + ' ');
+                result = result.replace(/a sérültet/g, context.patientName + 't');
+                result = result.replace(/a sérültnek/g, context.patientName + 'nak');
+            }
 
             result = result.replace(/{bodyPart}/g, context.bodyPart || '');
             result = result.replace(/{bodyPartOn}/g, context.bodyPartOn || '');
@@ -1245,7 +1550,10 @@
             const bodyPartOn = MEDICAL_DATA.bodyPartsOn[bodyPartId] || '';
             const bodyPartAround = MEDICAL_DATA.bodyPartsAround[bodyPartId] || '';
 
+            const patientName = document.getElementById('patientName').value.trim();
+
             const context = {
+                patientName: patientName || null,
                 bodyPart: bodyPart,
                 bodyPartOn: bodyPartOn,
                 bodyPartAround: bodyPartAround,
@@ -1317,26 +1625,103 @@
         }
 
         function renderOutput(lines) {
+            rpLines = lines;
+            rpCurrentIndex = 0;
+
+            if (rpModeActive) {
+                renderRpMode();
+            } else {
+                renderNormalMode();
+            }
+        }
+
+        function renderNormalMode() {
             const output = document.getElementById('output');
 
-            if (lines.length === 0) {
+            if (rpLines.length === 0) {
                 output.innerHTML = '<div class="placeholder">Nincs generált szöveg</div>';
                 return;
             }
 
             let html = '';
 
-            for (const line of lines) {
+            rpLines.forEach((line, index) => {
                 const lineClass = line.type === 'me' ? 'me-line' : 'do-line';
+                const severityClass = 'severity-' + currentSeverity;
                 html += `
-                    <div class="generated-line ${lineClass}">
+                    <div class="generated-line ${lineClass} ${severityClass} animated" style="animation-delay: ${index * 0.1}s">
                         <span class="line-text">${escapeHtml(line.text)}</span>
                         <button class="btn-copy" onclick="copyLine(this, '${escapeJs(line.text)}')">📋</button>
                     </div>
                 `;
-            }
+            });
 
             output.innerHTML = html;
+        }
+
+        function renderRpMode() {
+            const output = document.getElementById('output');
+
+            if (rpLines.length === 0) {
+                output.innerHTML = '<div class="placeholder">Generálj szöveget az RP mód használatához</div>';
+                return;
+            }
+
+            const line = rpLines[rpCurrentIndex];
+            const isLast = rpCurrentIndex >= rpLines.length - 1;
+            const severityClass = 'severity-' + currentSeverity;
+
+            let html = `
+                <div class="rp-counter">${rpCurrentIndex + 1} / ${rpLines.length} sor</div>
+                <div class="rp-current-line ${severityClass}">
+                    <span class="line-text">${escapeHtml(line.text)}</span>
+                    <button class="btn-rp-next" onclick="rpCopyAndNext()">
+                        ${isLast ? 'Másolás (utolsó sor)' : 'Másolás és következő'}
+                    </button>
+                    ${rpCurrentIndex > 0 ? '<button class="btn-rp-prev" onclick="rpPrev()">Előző sor</button>' : ''}
+                </div>
+            `;
+
+            output.innerHTML = html;
+        }
+
+        function toggleRpMode() {
+            rpModeActive = !rpModeActive;
+            const btn = document.querySelector('.btn-rp-mode');
+            btn.classList.toggle('active', rpModeActive);
+
+            if (rpLines.length > 0) {
+                if (rpModeActive) {
+                    renderRpMode();
+                } else {
+                    renderNormalMode();
+                }
+            }
+        }
+
+        function rpCopyAndNext() {
+            const line = rpLines[rpCurrentIndex];
+            navigator.clipboard.writeText(line.text).then(() => {
+                if (rpCurrentIndex < rpLines.length - 1) {
+                    rpCurrentIndex++;
+                    renderRpMode();
+                } else {
+                    const btn = document.querySelector('.btn-rp-next');
+                    btn.textContent = 'Másolva! (vége)';
+                    btn.style.background = 'var(--accent)';
+                    setTimeout(() => {
+                        btn.textContent = 'Másolás (utolsó sor)';
+                        btn.style.background = '';
+                    }, 1000);
+                }
+            });
+        }
+
+        function rpPrev() {
+            if (rpCurrentIndex > 0) {
+                rpCurrentIndex--;
+                renderRpMode();
+            }
         }
 
         function escapeHtml(text) {
