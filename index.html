@@ -731,6 +731,25 @@
             margin-bottom: 8px;
         }
 
+        .bullet-option {
+            padding: 8px 12px;
+            margin-top: 4px;
+            background: rgba(233, 69, 96, 0.08);
+            border: 1px solid rgba(233, 69, 96, 0.2);
+            border-radius: 8px;
+        }
+        .bullet-option label {
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bullet-option input[type="checkbox"] {
+            accent-color: var(--accent);
+        }
+
         .btn-add-injury {
             width: 100%;
             padding: 12px;
@@ -1440,29 +1459,37 @@
                             { type: "me", text: "megvizsgálja a sérültet" },
                             { type: "do", text: "A sérült {bodyPartOn} lőtt seb látható, a bemeneti nyílás körül vérzés." },
                             { type: "me", text: "eltávolítja a ruházatot a sérülés környékéről" },
-                            { type: "me", text: "megkeresi a kimeneti nyílást, ha van", severity: ["kozepes", "sulyos"] },
-                            { type: "do", text: "Kimeneti nyílás nem található, a lövedék a testben van.", severity: ["kozepes", "sulyos"] },
-                            { type: "me", text: "előkészíti a kötszert és nyomókötést helyez a sebre" },
+                            { type: "me", text: "megkeresi a kimeneti nyílást", bulletCondition: "in" },
+                            { type: "do", text: "Kimeneti nyílás nem található, a lövedék a testben van.", bulletCondition: "in" },
+                            { type: "me", text: "megvizsgálja a kimeneti nyílást a sérült {bodyPartOn}", bulletCondition: "out" },
+                            { type: "do", text: "A lövedék áthatolt, bemeneti és kimeneti nyílás is látható.", bulletCondition: "out" },
+                            { type: "me", text: "előkészíti a kötszert és nyomókötést helyez a bemeneti sebre" },
+                            { type: "me", text: "nyomókötést helyez a kimeneti nyílásra is", bulletCondition: "out" },
                             { type: "me", text: "elővesz egy Lidocain ampullát és egy fecskendőt, felszívja a {lidocainDose}-t", severity: ["kozepes", "sulyos"] },
                             { type: "me", text: "beadja a helyi érzéstelenítőt közvetlenül a seb mellé", severity: ["kozepes", "sulyos"] },
                             { type: "me", text: "elővesz egy Exacyl ampullát és egy fecskendőt, felszívja a {exacylDose}-ot", severity: ["sulyos"] },
                             { type: "me", text: "beadja az Exacyl-t intravénásan a vérzés csillapítására", severity: ["sulyos"] },
-                            { type: "do", text: "A sérültet sürgősen kórházba kell szállítani, a lövedék eltávolítása szükséges!" }
+                            { type: "do", text: "A sérültet sürgősen kórházba kell szállítani, a lövedék eltávolítása szükséges!", bulletCondition: "in" },
+                            { type: "do", text: "A sérültet kórházba kell szállítani a sebek ellátásához!", bulletCondition: "out" }
                         ],
                         korhaz: [
                             { type: "me", text: "megvizsgálja a sérültet" },
-                            { type: "do", text: "Lőtt sérülés a sérült {bodyPartOn}, bemeneti nyílás látható." },
-                            { type: "me", text: "képalkotó vizsgálatra küldi a lövedék lokalizálásához" },
+                            { type: "do", text: "Lőtt sérülés a sérült {bodyPartOn}, bemeneti nyílás látható.", bulletCondition: "in" },
+                            { type: "do", text: "Lőtt sérülés a sérült {bodyPartOn}, bemeneti és kimeneti nyílás látható.", bulletCondition: "out" },
+                            { type: "me", text: "képalkotó vizsgálatra küldi a lövedék lokalizálásához", bulletCondition: "in" },
                             { type: "me", text: "elővesz egy Morphine ampullát és egy fecskendőt, felszívja a {morphineDose}-ot" },
                             { type: "me", text: "beadja a Morphine érzéstelenítést" },
                             { type: "me", text: "előkészíti az infúziós szerelést, intravénás infúziót és vérpótlást indít" },
                             { type: "me", text: "felveszi a steril kesztyűt, előkészíti a műtős felszerelést" },
-                            { type: "me", text: "szikével feltárja a sebet" },
-                            { type: "me", text: "sebterpesztőt helyez be" },
-                            { type: "me", text: "csipesszel megkeresi és eltávolítja a lövedéket és repeszeket" },
+                            { type: "me", text: "szikével feltárja a sebet", bulletCondition: "in" },
+                            { type: "me", text: "sebterpesztőt helyez be", bulletCondition: "in" },
+                            { type: "me", text: "csipesszel megkeresi és eltávolítja a lövedéket és repeszeket", bulletCondition: "in" },
+                            { type: "me", text: "fertőtleníti a bemeneti és kimeneti sebet", bulletCondition: "out" },
                             { type: "me", text: "tűfogóval összezárja a sebet" },
+                            { type: "me", text: "tűfogóval összezárja a kimeneti sebet is", bulletCondition: "out" },
                             { type: "me", text: "fertőtleníti és bekötözi a sebet" },
-                            { type: "do", text: "A műtét sikeres, a lövedék eltávolítva." }
+                            { type: "do", text: "A műtét sikeres, a lövedék eltávolítva.", bulletCondition: "in" },
+                            { type: "do", text: "A sebek ellátva, a bemeneti és kimeneti nyílás összezárva.", bulletCondition: "out" }
                         ]
                     }
                 },
@@ -1858,6 +1885,9 @@
                         ${getBodyPartOptions()}
                     </select>
                 </div>
+                <div class="bullet-option" style="display:none">
+                    <label><input type="checkbox" class="bullet-out-check"> A golyó kijött (van kimeneti nyílás)</label>
+                </div>
             `;
 
             container.appendChild(slotDiv);
@@ -1908,6 +1938,7 @@
         function onSlotInjuryChange(selectEl) {
             const slot = selectEl.closest('.injury-slot');
             const bodyPartGroup = slot.querySelector('.bodypart-group');
+            const bulletOption = slot.querySelector('.bullet-option');
             const injuryType = selectEl.value;
             const injury = MEDICAL_DATA.injuries[injuryType];
 
@@ -1915,6 +1946,14 @@
                 bodyPartGroup.style.display = 'none';
             } else {
                 bodyPartGroup.style.display = '';
+            }
+
+            if (injuryType === 'lott_serules') {
+                bulletOption.style.display = '';
+            } else {
+                bulletOption.style.display = 'none';
+                const check = bulletOption.querySelector('.bullet-out-check');
+                if (check) check.checked = false;
             }
 
             updateLocationWarnings();
@@ -1929,7 +1968,8 @@
                 const injuryType = slot.querySelector('.injury-select').value;
                 const bodyPart = slot.querySelector('.bodypart-select').value;
                 if (injuryType) {
-                    result.push({ injuryType, bodyPart });
+                    const bulletOut = slot.querySelector('.bullet-out-check')?.checked || false;
+                    result.push({ injuryType, bodyPart, bulletOut });
                 }
             });
 
@@ -2108,6 +2148,11 @@
                 for (const step of protocol) {
                     if (step.severity && !step.severity.includes(currentSeverity)) {
                         continue;
+                    }
+                    if (step.bulletCondition) {
+                        const isBulletOut = slot.bulletOut || false;
+                        if (step.bulletCondition === 'in' && isBulletOut) continue;
+                        if (step.bulletCondition === 'out' && !isBulletOut) continue;
                     }
                     const processedText = processTemplate(step.text, context);
                     allLines.push({
