@@ -1102,6 +1102,13 @@
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
+                    <h2>Anim (eszméletlen beteg)</h2>
+                    <div class="procedures-grid">
+                        <button class="btn-procedure" onclick="generateAnim()">Sóoldatos infúzió bekötése</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
                     <div class="medications-list">
                         <div class="collapsible-header" onclick="toggleMedications()">
                             <h3>Gyógyszerek referencia</h3>
@@ -2353,6 +2360,21 @@
                 });
             }
 
+            renderOutput(lines);
+        }
+
+        function generateAnim() {
+            const lines = [
+                { type: "me", text: "/me letérdel a sérült mellé és ellenőrzi az eszméletét" },
+                { type: "do", text: "/do A sérült eszméletlen, nem reagál a megszólításra." },
+                { type: "me", text: "/me előveszi a mentőtáskából a kanült és a sóoldatos infúziós zacskót" },
+                { type: "me", text: "/me felhelyezi a stranguláló gumit a sérült karjára és kitapintja a vénát" },
+                { type: "me", text: "/me alkoholos vattatamponnal fertőtleníti a szúrás helyét" },
+                { type: "me", text: "/me bevezeti a kanült a vénába és rögzíti a bőrön" },
+                { type: "me", text: "/me rácsatlakoztatja a sóoldatos infúziós szerelést a kanülre" },
+                { type: "me", text: "/me megnyitja a csepegtetőt és beállítja a csepegési sebességet" },
+                { type: "do", text: "/do Az infúzió elkezd csöpögni, a sóoldat lassan áramlik a beteg keringésébe." }
+            ];
             renderOutput(lines);
         }
 
