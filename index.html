@@ -731,6 +731,20 @@
             margin-bottom: 8px;
         }
 
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .checkbox-label input[type="checkbox"] {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+        }
+
         .bullet-option {
             padding: 8px 12px;
             margin-top: 4px;
@@ -854,6 +868,122 @@
             overflow: hidden;
         }
 
+        /* Kedvenc sablonok */
+        .favorites-panel {
+            margin-bottom: 20px;
+        }
+
+        .favorites-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .favorites-header::after {
+            content: "▼";
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .favorites-header.collapsed::after {
+            transform: rotate(-90deg);
+        }
+
+        .favorites-content {
+            max-height: 400px;
+            overflow-y: auto;
+            transition: max-height 0.3s;
+        }
+
+        .favorites-content.collapsed {
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .favorite-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            margin: 6px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.15);
+        }
+
+        .favorite-item-info {
+            flex: 1;
+        }
+
+        .favorite-item-name {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .favorite-item-details {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+
+        .btn-delete-favorite {
+            background: rgba(233, 69, 96, 0.15);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+            color: var(--accent);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+
+        .btn-delete-favorite:hover {
+            background: rgba(233, 69, 96, 0.3);
+        }
+
+        .btn-save-favorite {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            color: var(--success);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save-favorite:hover {
+            background: rgba(74, 222, 128, 0.2);
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.2);
+        }
+
+        .favorites-empty {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 15px;
+            font-style: italic;
+        }
+
         /* Egyedi scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -883,6 +1013,16 @@
 
         <div class="main-layout">
             <div class="left-panel">
+                <div class="card favorites-panel">
+                    <div class="favorites-header" onclick="toggleFavorites()">
+                        <h2>Kedvenc sablonok</h2>
+                    </div>
+                    <div class="favorites-content collapsed" id="favoritesContent">
+                        <div id="favoritesList"></div>
+                        <button class="btn-save-favorite" onclick="saveFavorite()">+ Jelenlegi beállítás mentése</button>
+                    </div>
+                </div>
+
                 <div class="card">
                     <h2>Sérülés beállítások</h2>
 
@@ -906,6 +1046,13 @@
                             <button class="btn-option active" data-value="helyszin">Helyszín (Utca)</button>
                             <button class="btn-option" data-value="korhaz">Kórház</button>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="leadApronCheck" checked>
+                            Ólomkötény használata képalkotónál
+                        </label>
                     </div>
 
                     <div id="injurySlotsContainer" class="injury-slots-container">
@@ -941,6 +1088,16 @@
                         <button class="btn-procedure" onclick="generateInjection('exacyl')">Exacyl (véralvadás)</button>
                         <button class="btn-procedure" onclick="generateInjection('arterenol')">Arterenol (vérnyomás)</button>
                         <button class="btn-procedure" onclick="generateInjection('tonogen')">Tonogen (adrenalin)</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h2>Infúzió / Vérpótlás</h2>
+                    <div class="procedures-grid">
+                        <button class="btn-procedure" onclick="generateInfusion('isolitye')">Isolitye infúzió</button>
+                        <button class="btn-procedure" onclick="generateInfusion('ringer')">Ringer-laktát</button>
+                        <button class="btn-procedure" onclick="generateInfusion('nacl')">NaCl 0.9%</button>
+                        <button class="btn-procedure" onclick="generateInfusion('verpotlas')">Vérpótlás</button>
                     </div>
                 </div>
 
@@ -1575,6 +1732,58 @@
                         kozepes: ["lassan stabilizálódik", "megfigyelés szükséges"],
                         sulyos: ["kritikus, intenzív ellátás szükséges"]
                     }
+                },
+
+                ujraelesztes: {
+                    name: "Újraélesztés (CPR)",
+                    requiresBodyPart: false,
+                    isCritical: true,
+                    protocols: {
+                        helyszin: [
+                            { type: "me", text: "megpróbálja megszólítani és megérinteni a sérültet, megrázzza a vállát" },
+                            { type: "do", text: "A sérült nem reagál, eszméletlen." },
+                            { type: "me", text: "ellenőrzi a légzést - az arcához hajol, figyeli a mellkas mozgását" },
+                            { type: "do", text: "A sérült nem lélegzik / agonális a légzése." },
+                            { type: "me", text: "a sérültet hanyatt fekteti kemény felületen" },
+                            { type: "me", text: "kiszabadítja a mellkast, megkeresi a kompresszió pontját a szegycsont alsó harmadán" },
+                            { type: "me", text: "elkezdi a mellkaskompressziókat: 30 kompresszió, mélység 5-6 cm, tempó 100-120/perc" },
+                            { type: "do", text: "30 mellkaskompresszió elvégezve." },
+                            { type: "me", text: "fejet hátrahajtja, állat megemeli, 2 befúvást ad" },
+                            { type: "do", text: "A mellkas megemelkedik a befúvásokra." },
+                            { type: "me", text: "folytatja a 30:2 arányú újraélesztést" },
+                            { type: "me", text: "előkészíti az AED-t (automata defibrillátor), felhelyezi az elektródákat", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "Az AED analizálja a ritmust...", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "Sokk javasolt! Mindenki álljon el a betegtől!", severity: ["sulyos"] },
+                            { type: "me", text: "megnyomja a sokk gombot az AED-n", severity: ["sulyos"] },
+                            { type: "do", text: "Sokk leadva.", severity: ["sulyos"] },
+                            { type: "do", text: "Sokk nem javasolt, CPR folytatása.", severity: ["kozepes"] },
+                            { type: "me", text: "folytatja a mellkaskompressziókat" },
+                            { type: "me", text: "elővesz egy Tonogen ampullát, felszívja a {arterenolDose}-ot és beadja intravénásan", severity: ["sulyos"] },
+                            { type: "do", text: "A beteg reagál, légzése visszatér.", severity: ["enyhe"] },
+                            { type: "do", text: "A beteg reagál a CPR-re, pulzusa visszatér.", severity: ["kozepes"] },
+                            { type: "do", text: "A beteg pulzusa visszatér, de instabil - sürgős kórházi ellátás szükséges!", severity: ["sulyos"] }
+                        ],
+                        korhaz: [
+                            { type: "me", text: "megpróbálja megszólítani a beteget" },
+                            { type: "do", text: "A beteg nem reagál, eszméletlen." },
+                            { type: "me", text: "ellenőrzi a légzést és a pulzust" },
+                            { type: "do", text: "Nincs pulzus, nincs légzés - újraélesztés szükséges!" },
+                            { type: "me", text: "kiszabadítja a mellkast, megkezdi a mellkaskompressziókat" },
+                            { type: "do", text: "30 mellkaskompresszió elvégezve." },
+                            { type: "me", text: "ambu táskás lélegeztetést alkalmaz" },
+                            { type: "me", text: "intubálást végez a légút biztosítására", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "előkészíti a defibrillátor lapátjait, gélezi és felhelyezi", severity: ["kozepes", "sulyos"] },
+                            { type: "do", text: "Kamrafibrilláció észlelhető a monitoron.", severity: ["sulyos"] },
+                            { type: "me", text: "360 Joule-ra állítja a defibrillátort és sokkot ad", severity: ["sulyos"] },
+                            { type: "do", text: "Sokk leadva!", severity: ["sulyos"] },
+                            { type: "me", text: "elővesz egy Tonogen ampullát, felszívja és beadja intravénásan", severity: ["kozepes", "sulyos"] },
+                            { type: "me", text: "Atropint ad intravénásan", severity: ["sulyos"] },
+                            { type: "me", text: "folytatja a mellkaskompressziókat 2 percig" },
+                            { type: "me", text: "újra ellenőrzi a ritmust a monitoron" },
+                            { type: "do", text: "Szinusz ritmus visszatért, a beteg pulzusa érzékelhető!", severity: ["enyhe", "kozepes"] },
+                            { type: "do", text: "A reanimáció sikeres, a beteg stabilizálódik - intenzív osztályra szállítás szükséges!", severity: ["sulyos"] }
+                        ]
+                    }
                 }
             },
 
@@ -1650,7 +1859,7 @@
                     steps: [
                         { type: "me", text: "levéteti az ékszereket a beteggel" },
                         { type: "me", text: "az érintett testrészt fedő ruhadarabot levéteti" },
-                        { type: "me", text: "előkészíti az ólomkötényt és felhelyezi a betegre" },
+                        { type: "me", text: "előkészíti az ólomkötényt és felhelyezi a betegre", leadApron: true },
                         { type: "me", text: "lefekteti a beteget a röntgen asztalra" },
                         { type: "me", text: "a vizsgálandó terület alá digitális filmet helyez" },
                         { type: "me", text: "beállítja a röntgengépet és elkészíti a felvételt" },
@@ -1815,6 +2024,7 @@
                 </optgroup>
                 <optgroup label="Kritikus">
                     <option value="ajulas">😵 Ájulás / Eszméletvesztés</option>
+                    <option value="ujraelesztes">❤️ Újraélesztés (CPR)</option>
                 </optgroup>
             `;
         }
@@ -2081,6 +2291,67 @@
             renderOutput(lines);
         }
 
+        // ==================== INFÚZIÓ / VÉRPÓTLÁS ====================
+        const INFUSIONS = {
+            isolitye: {
+                name: "Isolitye",
+                steps: [
+                    { type: "me", text: "elővesz egy 500 ml-es Isolitye infúziós palackot" },
+                    { type: "me", text: "felakasztja az infúziós állványra és csatlakoztatja a szerelékhez" },
+                    { type: "me", text: "csatlakoztatja az infúziót a beteg vénájához" },
+                    { type: "me", text: "beállítja a cseppszámot és megnyitja a görgős szorítót" },
+                    { type: "do", text: "Az Isolitye infúzió folyik, a beteg folyadékpótlása megkezdődött." }
+                ]
+            },
+            ringer: {
+                name: "Ringer-laktát",
+                steps: [
+                    { type: "me", text: "elővesz egy 500 ml-es Ringer-laktát infúziós palackot" },
+                    { type: "me", text: "felakasztja az infúziós állványra és csatlakoztatja a szerelékhez" },
+                    { type: "me", text: "csatlakoztatja az infúziót a beteg vénájához" },
+                    { type: "me", text: "beállítja a cseppszámot és megnyitja a görgős szorítót" },
+                    { type: "do", text: "A Ringer-laktát infúzió folyik." }
+                ]
+            },
+            nacl: {
+                name: "NaCl 0.9%",
+                steps: [
+                    { type: "me", text: "elővesz egy 500 ml-es NaCl 0.9% fiziológiás sóoldatot" },
+                    { type: "me", text: "felakasztja az infúziós állványra és csatlakoztatja a szerelékhez" },
+                    { type: "me", text: "csatlakoztatja az infúziót a beteg vénájához" },
+                    { type: "me", text: "beállítja a cseppszámot" },
+                    { type: "do", text: "A NaCl infúzió folyik, a beteg folyadékpótlása biztosított." }
+                ]
+            },
+            verpotlas: {
+                name: "Vérpótlás",
+                steps: [
+                    { type: "me", text: "előkészíti a vértranszfúziós szerelést" },
+                    { type: "me", text: "ellenőrzi a vérkészítmény adatait: típus, vércsoport, lejárat" },
+                    { type: "me", text: "keresztpróbát végez a beteg vérével a kompatibilitás érdekében" },
+                    { type: "do", text: "A keresztpróba eredménye kompatibilis." },
+                    { type: "me", text: "csatlakoztatja a vértasakot az infúziós szerelékhez" },
+                    { type: "me", text: "lassan megnyitja a cseppszámszabályzót, figyeli a beteg reakcióját" },
+                    { type: "do", text: "A vérpótlás megkezdődött, a beteg állapota monitorozás alatt." }
+                ]
+            }
+        };
+
+        function generateInfusion(type) {
+            const infusion = INFUSIONS[type];
+            if (!infusion) return;
+
+            const lines = [];
+            for (const step of infusion.steps) {
+                lines.push({
+                    type: step.type,
+                    text: `/${step.type} ${step.text}`
+                });
+            }
+
+            renderOutput(lines);
+        }
+
         function toggleMedications() {
             const content = document.getElementById('medicationsContent');
             const header = content.previousElementSibling;
@@ -2145,6 +2416,8 @@
                     condition: injury.conditionResults ? randomChoice(injury.conditionResults[currentSeverity]) : ''
                 };
 
+                const useLeadApron = document.getElementById('leadApronCheck').checked;
+
                 for (const step of protocol) {
                     if (step.severity && !step.severity.includes(currentSeverity)) {
                         continue;
@@ -2159,6 +2432,12 @@
                         type: step.type,
                         text: `/${step.type} ${processedText}`
                     });
+                    if (useLeadApron && (step.text.includes('röntgen') || step.text.includes('képalkotó'))) {
+                        allLines.push({
+                            type: 'me',
+                            text: '/me felhelyezi az ólomkötényt a betegre a sugárvédelem érdekében'
+                        });
+                    }
                 }
             }
 
@@ -2189,7 +2468,10 @@
 
             const lines = [];
 
+            const useLeadApron = document.getElementById('leadApronCheck').checked;
+
             for (const step of procedure.steps) {
+                if (step.leadApron && !useLeadApron) continue;
                 const processedText = processTemplate(step.text, context);
                 lines.push({
                     type: step.type,
@@ -2377,10 +2659,141 @@
             });
         }
 
+        // ==================== KEDVENC SABLONOK ====================
+        function getFavorites() {
+            try {
+                return JSON.parse(localStorage.getItem('seemta_favorites') || '[]');
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveFavorites(favorites) {
+            localStorage.setItem('seemta_favorites', JSON.stringify(favorites));
+        }
+
+        function saveFavorite() {
+            const name = prompt('Add meg a sablon nevét:');
+            if (!name || !name.trim()) return;
+
+            const slots = getInjurySlots();
+            if (slots.length === 0 || !slots[0].injuryType) {
+                alert('Kérlek válassz legalább egy sérülés típust a mentés előtt!');
+                return;
+            }
+
+            const favorite = {
+                name: name.trim(),
+                severity: currentSeverity,
+                location: currentLocation,
+                patientName: document.getElementById('patientName').value || '',
+                leadApron: document.getElementById('leadApronCheck').checked,
+                slots: slots
+            };
+
+            const favorites = getFavorites();
+            favorites.push(favorite);
+            saveFavorites(favorites);
+            renderFavorites();
+        }
+
+        function loadFavorite(index) {
+            const favorites = getFavorites();
+            const fav = favorites[index];
+            if (!fav) return;
+
+            // Súlyosság beállítása
+            currentSeverity = fav.severity || 'enyhe';
+            document.querySelectorAll('#severityGroup .btn-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.value === currentSeverity);
+            });
+
+            // Helyszín beállítása
+            currentLocation = fav.location || 'helyszin';
+            document.querySelectorAll('#locationGroup .btn-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.value === currentLocation);
+            });
+
+            // Beteg neve
+            document.getElementById('patientName').value = fav.patientName || '';
+
+            // Ólomkötény
+            if (fav.leadApron !== undefined) {
+                document.getElementById('leadApronCheck').checked = fav.leadApron;
+            }
+
+            // Slotok újraépítése
+            const container = document.getElementById('injurySlotsContainer');
+            container.innerHTML = '';
+            injurySlotCount = 0;
+
+            for (const slot of fav.slots) {
+                addInjurySlot();
+                const slotEl = container.lastElementChild;
+                const injurySelect = slotEl.querySelector('.injury-select');
+                const bodyPartSelect = slotEl.querySelector('.bodypart-select');
+
+                if (injurySelect && slot.injuryType) {
+                    injurySelect.value = slot.injuryType;
+                    onSlotInjuryChange(injurySelect);
+                }
+                if (bodyPartSelect && slot.bodyPart) {
+                    bodyPartSelect.value = slot.bodyPart;
+                }
+                if (slot.bulletOut) {
+                    const bulletCheck = slotEl.querySelector('.bullet-out-check');
+                    if (bulletCheck) bulletCheck.checked = true;
+                }
+            }
+        }
+
+        function deleteFavorite(index, event) {
+            event.stopPropagation();
+            const favorites = getFavorites();
+            favorites.splice(index, 1);
+            saveFavorites(favorites);
+            renderFavorites();
+        }
+
+        function renderFavorites() {
+            const list = document.getElementById('favoritesList');
+            const favorites = getFavorites();
+
+            if (favorites.length === 0) {
+                list.innerHTML = '<div class="favorites-empty">Nincs mentett sablon. Állítsd be a kívánt sérülést, majd kattints a mentés gombra!</div>';
+                return;
+            }
+
+            let html = '';
+            for (let i = 0; i < favorites.length; i++) {
+                const fav = favorites[i];
+                const severityLabel = fav.severity === 'enyhe' ? 'Enyhe' : fav.severity === 'kozepes' ? 'Közepes' : 'Súlyos';
+                const locationLabel = fav.location === 'korhaz' ? 'Kórház' : 'Helyszín';
+                const slotCount = fav.slots ? fav.slots.length : 0;
+
+                html += '<div class="favorite-item" onclick="loadFavorite(' + i + ')">';
+                html += '<div class="favorite-item-info">';
+                html += '<div class="favorite-item-name">' + escapeHtml(fav.name) + '</div>';
+                html += '<div class="favorite-item-details">' + severityLabel + ' | ' + locationLabel + ' | ' + slotCount + ' sérülés</div>';
+                html += '</div>';
+                html += '<button class="btn-delete-favorite" onclick="deleteFavorite(' + i + ', event)" title="Törlés">✕</button>';
+                html += '</div>';
+            }
+            list.innerHTML = html;
+        }
+
+        function toggleFavorites() {
+            const content = document.getElementById('favoritesContent');
+            const header = content.previousElementSibling;
+            content.classList.toggle('collapsed');
+            header.classList.toggle('collapsed');
+        }
+
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
             setupButtonGroups();
             addInjurySlot();
+            renderFavorites();
         });
     </script>
 
