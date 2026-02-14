@@ -1109,6 +1109,13 @@
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
+                    <h2>Vérzés stabilizálás</h2>
+                    <div class="procedures-grid">
+                        <button class="btn-procedure" onclick="generateBleedingStab()">Vérzéscsillapítás + stabilizálás</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
                     <div class="medications-list">
                         <div class="collapsible-header" onclick="toggleMedications()">
                             <h3>Gyógyszerek referencia</h3>
@@ -2373,6 +2380,27 @@
                 { type: "me", text: "/me rácsatlakoztatja a sóoldatos infúziós szerelést a kanülre" },
                 { type: "me", text: "/me megnyitja a csepegtetőt és beállítja a csepegési sebességet" },
                 { type: "do", text: "/do Az infúzió elkezd csöpögni, a sóoldat lassan áramlik a beteg keringésébe." }
+            ];
+            renderOutput(lines);
+        }
+
+        function generateBleedingStab() {
+            const lines = [
+                { type: "me", text: "/me letérdel a sérült mellé és gyorsan felméri az állapotát" },
+                { type: "me", text: "/me ellenőrzi az eszméletét, megpróbálja megszólítani" },
+                { type: "me", text: "/me azonosítja a vérzés forrását és feltárja a sérülést" },
+                { type: "me", text: "/me erős, direkt nyomást alkalmaz a seben steril mull lapokkal" },
+                { type: "me", text: "/me nyomókötést helyez a sebre és szorosan rögzíti" },
+                { type: "me", text: "/me ellenőrzi a beteg légzését és pulzusát" },
+                { type: "do", text: "/do A beteg pulzusa gyenge, légzése felületes." },
+                { type: "me", text: "/me előkészíti a kanült és a stranguláló gumit" },
+                { type: "me", text: "/me alkoholos vattatamponnal fertőtleníti a szúrás helyét" },
+                { type: "me", text: "/me bevezeti a kanült a vénába és rögzíti" },
+                { type: "me", text: "/me rácsatlakoztatja a sóoldatos infúziót a kanülre és maximális sebességre állítja" },
+                { type: "me", text: "/me elővesz egy Exacyl ampullát, felszívja és beadja intravénásan a véralvadás segítésére" },
+                { type: "me", text: "/me ellenőrzi a nyomókötést, szükség esetén újabb réteget helyez rá" },
+                { type: "me", text: "/me stabil oldalfekvésbe helyezi a sérültet" },
+                { type: "do", text: "/do A vérzés csillapítva, a beteg állapota stabilizálódik, az infúzió csöpög." }
             ];
             renderOutput(lines);
         }
