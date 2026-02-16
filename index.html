@@ -82,6 +82,14 @@
             }
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a3e, #0f0c29);
@@ -89,9 +97,13 @@
             animation: gradientShift 45s ease infinite;
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
             position: relative;
             overflow-x: hidden;
+        }
+
+        button, select, input {
+            touch-action: manipulation;
         }
 
         /* Lebegő dekoratív körök */
@@ -132,18 +144,18 @@
         /* Fejléc */
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         .header-logo {
-            width: 110px;
+            width: 70px;
             height: auto;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             animation: pulseGlow 3s ease-in-out infinite;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 1.6rem;
             color: var(--accent);
             margin-bottom: 5px;
             text-shadow: 0 0 30px var(--accent-glow);
@@ -152,12 +164,12 @@
 
         header p {
             color: var(--text-secondary);
-            font-size: 1.05rem;
+            font-size: 0.85rem;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: inline-block;
-            padding: 6px 20px;
+            padding: 4px 14px;
             border-radius: 20px;
             border: 1px solid var(--glass-border);
         }
@@ -208,17 +220,30 @@
             font-size: 0.85rem;
         }
 
-        /* Layout */
+        /* Layout - mobile-first (1 oszlop) */
         .main-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
 
-        @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
+        /* Desktop (901px+) */
+        @media (min-width: 901px) {
+            body { padding: 20px; }
+            header { margin-bottom: 30px; }
+            header h1 { font-size: 2.5rem; }
+            .header-logo { width: 110px; margin-bottom: 12px; }
+            header p { font-size: 1.05rem; padding: 6px 20px; }
+            .main-layout { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .card:hover {
+                background: var(--glass-bg-hover);
+                border-color: rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
             }
+            .procedures-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+            .btn-procedure:hover { transform: translateY(-1px); }
+            .btn-generate:hover { transform: translateY(-3px); }
         }
 
         /* Telefon landscape mód */
@@ -227,32 +252,21 @@
                 grid-template-columns: 2fr 3fr;
                 gap: 10px;
             }
-            body { padding: 10px; }
-            header h1 { font-size: 1.5rem; margin-bottom: 2px; }
-            header p { font-size: 0.85rem; padding: 4px 14px; }
+            header h1 { font-size: 1.4rem; margin-bottom: 2px; }
             header { margin-bottom: 10px; }
             .card { padding: 12px; }
             .card h2 { font-size: 1.1rem; margin-bottom: 10px; padding-bottom: 6px; }
             .form-group { margin-bottom: 10px; }
             .form-group label { margin-bottom: 4px; font-size: 0.85rem; }
             select { padding: 8px; font-size: 0.85rem; }
-            .btn-option { padding: 6px 12px; font-size: 0.8rem; }
+            .btn-option { padding: 6px 12px; font-size: 0.8rem; min-height: 36px; }
             .btn-generate { padding: 10px 20px; font-size: 0.95rem; margin-top: 5px; }
             .procedures-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-top: 8px; }
-            .btn-procedure { padding: 8px 6px; font-size: 0.75rem; }
+            .btn-procedure { padding: 8px 6px; font-size: 0.75rem; min-height: 36px; }
             .generated-line { padding: 8px 10px; margin: 4px 0; }
             .line-text { font-size: 0.85rem; }
             .right-panel { position: sticky; top: 10px; max-height: calc(100vh - 20px); overflow-y: auto; }
             .header-logo { width: 60px; }
-        }
-
-        /* Telefon portrait mód */
-        @media (orientation: portrait) and (max-width: 600px) {
-            .btn-option { padding: 12px 16px; font-size: 1rem; }
-            .btn-procedure { padding: 14px 10px; font-size: 0.9rem; }
-            .btn-generate { padding: 16px 30px; font-size: 1.15rem; }
-            .generated-line { padding: 14px 12px; }
-            .btn-copy { padding: 10px 14px; min-width: 50px; }
         }
 
         /* ========== GLASSMORPHISM KÁRTYÁK ========== */
@@ -267,12 +281,7 @@
             transition: all 0.3s ease;
         }
 
-        .card:hover {
-            background: var(--glass-bg-hover);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-        }
+        /* Card hover csak desktop-on - lásd @media (min-width: 901px) */
 
         .card h2 {
             color: var(--accent);
@@ -348,14 +357,15 @@
         }
 
         .btn-option {
-            padding: 10px 20px;
+            padding: 12px 18px;
             border: 1px solid var(--glass-border);
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.03);
             color: var(--text-primary);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            min-height: 44px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -400,12 +410,12 @@
         /* Generálás gomb */
         .btn-generate {
             width: 100%;
-            padding: 15px 30px;
+            padding: 16px 30px;
             background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -463,8 +473,8 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-left: 3px solid var(--accent);
-            padding: 12px 15px;
-            margin: 8px 0;
+            padding: 14px 12px;
+            margin: 6px 0;
             border-radius: 0 10px 10px 0;
             display: flex;
             justify-content: space-between;
@@ -507,14 +517,15 @@
         }
 
         .btn-copy {
-            padding: 6px 12px;
+            padding: 10px 14px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-secondary);
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 40px;
+            min-width: 50px;
+            min-height: 44px;
         }
 
         .btn-copy:hover {
@@ -540,21 +551,22 @@
         /* ========== BEAVATKOZÁSOK ========== */
         .procedures-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
             margin-top: 15px;
         }
 
         .btn-procedure {
-            padding: 12px 10px;
+            padding: 14px 10px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--glass-border);
             color: var(--text-primary);
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-align: center;
+            min-height: 44px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
@@ -2544,6 +2556,11 @@
             } else {
                 renderNormalMode();
             }
+
+            // Telefonon auto-scroll a kimenethez
+            setTimeout(function() {
+                document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
         }
 
         function renderNormalMode() {
