@@ -106,9 +106,9 @@
             animation: gradientShift 45s ease infinite;
             color: var(--text-primary);
             min-height: 100vh;
-            padding: 10px;
+            padding: 0;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         button, select, input {
@@ -144,161 +144,218 @@
             animation: float2 35s ease-in-out infinite;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* ========== APP WRAPPER + NAVBAR ========== */
+        .app-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
             z-index: 1;
         }
 
-        /* Fejléc */
-        header {
-            text-align: center;
-            margin-bottom: 15px;
+        .top-navbar {
+            height: 52px;
+            flex-shrink: 0;
+            background: rgba(10, 9, 26, 0.97);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            gap: 12px;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
         }
 
-        .header-logo {
-            width: 70px;
-            height: auto;
-            margin-bottom: 8px;
+        .hamburger {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            min-width: 44px;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .hamburger:hover { background: rgba(255, 255, 255, 0.08); }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-logo-img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px var(--accent-glow));
             animation: pulseGlow 3s ease-in-out infinite;
         }
 
-        header h1 {
-            font-size: 1.6rem;
+        .navbar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--accent);
-            margin-bottom: 5px;
-            text-shadow: 0 0 30px var(--accent-glow);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 12px var(--accent-glow);
         }
 
-        header p {
+        .navbar-subtitle {
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
         }
 
-        /* Footer */
-        .site-footer {
-            margin-top: 40px;
-            padding: 30px 20px;
-            text-align: center;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
+        .navbar-right { margin-left: auto; }
+
+        /* ========== APP BODY ========== */
+        .app-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
         }
 
-        .footer-content {
-            max-width: 400px;
-            margin: 0 auto;
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            width: 290px;
+            flex-shrink: 0;
+            background: #0c0b22;
+            border-right: 1px solid rgba(255, 255, 255, 0.07);
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: transform 0.3s ease;
+            z-index: 50;
         }
 
-        .footer-portrait {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center 15%;
-            border: 3px solid rgba(233, 69, 96, 0.5);
-            margin-bottom: 12px;
-            box-shadow: 0 0 20px var(--accent-glow);
-            transition: box-shadow 0.4s ease, transform 0.4s ease;
+        .sidebar-nav { padding: 8px 6px 24px 6px; }
+
+        .sidebar-section { margin-bottom: 2px; }
+
+        .sidebar-section-header {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s ease, color 0.2s ease;
+            user-select: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        .footer-portrait:hover {
-            box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(233, 69, 96, 0.15);
-            transform: scale(1.05);
-        }
-
-        .footer-text {
+        .sidebar-section-header:hover {
+            background: rgba(255, 255, 255, 0.06);
             color: var(--text-primary);
-            font-style: italic;
-            font-size: 1rem;
-            margin-bottom: 5px;
         }
 
-        .footer-name {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
+        .sidebar-section-header.active {
+            background: rgba(233, 69, 96, 0.13);
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent);
+            padding-left: 9px;
         }
 
-        /* Layout - mobile-first (1 oszlop) */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
+        .section-icon { font-size: 0.95rem; flex-shrink: 0; width: 20px; text-align: center; }
+        .section-label { flex: 1; font-weight: 500; letter-spacing: 0.2px; }
+        .section-arrow { font-size: 0.6rem; transition: transform 0.25s ease; opacity: 0.6; }
+        .sidebar-section-header.active .section-arrow { transform: rotate(90deg); }
+
+        .sidebar-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
         }
 
-        /* Mobil teljesítmény optimalizálás */
+        .sidebar-section-content.open { max-height: 3000px; }
+
+        .section-inner {
+            padding: 6px 10px 12px 14px;
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            margin-left: 10px;
+        }
+
+        /* ========== SIDEBAR OVERLAY (mobile) ========== */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 40;
+        }
+
+        .sidebar-overlay.visible { display: block; }
+
+        /* ========== MAIN CONTENT (output) ========== */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+        }
+
+        .output-card #output {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 200px;
+        }
+
+        /* ========== MOBIL (<= 900px) ========== */
         @media (max-width: 900px) {
             body {
                 animation: none;
                 background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
                 background-size: 100% 100%;
             }
-            .header-logo {
-                animation: none;
-                filter: drop-shadow(0 0 8px var(--accent-glow));
+            .sidebar {
+                position: fixed;
+                top: 52px;
+                left: 0;
+                bottom: 0;
+                transform: translateX(-100%);
+                width: min(290px, 88vw);
             }
-            .card, header p, .site-footer, select, .btn-option,
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: 4px 0 24px rgba(0, 0, 0, 0.6);
+            }
+            .card, select, .btn-option,
             .btn-procedure, .generated-line, .btn-generate,
-            .copy-all-container, .injury-divider, .btn-rp-mode,
-            .placeholder, .favorite-item, .favorites-panel,
+            .btn-rp-mode, .placeholder, .favorite-item,
             .bullet-option, .btn-copy-all, #patientName {
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
             }
         }
 
-        /* Desktop (901px+) */
+        /* ========== DESKTOP (901px+) ========== */
         @media (min-width: 901px) {
-            body { padding: 20px; }
             body::before, body::after { display: block; }
-            header { margin-bottom: 30px; }
-            header h1 { font-size: 2.5rem; }
-            .header-logo { width: 110px; margin-bottom: 12px; }
-            header p { font-size: 1.05rem; padding: 6px 20px; }
-            .main-layout { grid-template-columns: 1fr 1fr; gap: 20px; }
             .card:hover {
                 background: var(--glass-bg-hover);
                 border-color: rgba(255, 255, 255, 0.15);
                 transform: translateY(-2px);
                 box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
             }
-            .procedures-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+            .procedures-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
             .btn-procedure:hover { transform: translateY(-1px); }
             .btn-generate:hover { transform: translateY(-3px); }
-        }
-
-        /* Telefon landscape mód */
-        @media (orientation: landscape) and (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 2fr 3fr;
-                gap: 10px;
-            }
-            header h1 { font-size: 1.4rem; margin-bottom: 2px; }
-            header { margin-bottom: 10px; }
-            .card { padding: 12px; }
-            .card h2 { font-size: 1.1rem; margin-bottom: 10px; padding-bottom: 6px; }
-            .form-group { margin-bottom: 10px; }
-            .form-group label { margin-bottom: 4px; font-size: 0.85rem; }
-            select { padding: 8px; font-size: 0.85rem; }
-            .btn-option { padding: 6px 12px; font-size: 0.8rem; min-height: 36px; }
-            .btn-generate { padding: 10px 20px; font-size: 0.95rem; margin-top: 5px; }
-            .procedures-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-top: 8px; }
-            .btn-procedure { padding: 8px 6px; font-size: 0.75rem; min-height: 36px; }
-            .generated-line { padding: 8px 10px; margin: 4px 0; }
-            .line-text { font-size: 0.85rem; }
-            .right-panel { position: sticky; top: 10px; max-height: calc(100vh - 20px); overflow-y: auto; }
-            .header-logo { width: 60px; }
         }
 
         /* ========== GLASSMORPHISM KÁRTYÁK ========== */
@@ -1048,142 +1105,196 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="Insignia_Hungary_OMSZ_v1.svg.png" alt="OMSZ Logo" class="header-logo">
-            <h1>SeeMTA V4 OMSZ RP Generátor</h1>
-            <p>Orvosi RP szöveg generátor az ellátási segédlet alapján</p>
-        </header>
-
-        <div class="main-layout">
-            <div class="left-panel">
-                <div class="card favorites-panel">
-                    <div class="favorites-header" onclick="toggleFavorites()">
-                        <h2>Kedvenc sablonok</h2>
-                    </div>
-                    <div class="favorites-content collapsed" id="favoritesContent">
-                        <div id="favoritesList"></div>
-                        <button class="btn-save-favorite" onclick="saveFavorite()">+ Jelenlegi beállítás mentése</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Sérülés beállítások</h2>
-
-                    <div class="form-group">
-                        <label>Beteg neve (opcionális)</label>
-                        <input type="text" id="patientName" placeholder="pl. Kiss János" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:8px;background:var(--bg-secondary);color:var(--text-primary);font-size:1rem;">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Súlyosság</label>
-                        <div class="button-group" id="severityGroup">
-                            <button class="btn-option active" data-value="enyhe">Enyhe</button>
-                            <button class="btn-option" data-value="kozepes">Közepes</button>
-                            <button class="btn-option" data-value="sulyos">Súlyos</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Helyszín</label>
-                        <div class="button-group" id="locationGroup">
-                            <button class="btn-option active" data-value="helyszin">Helyszín (Utca)</button>
-                            <button class="btn-option" data-value="korhaz">Kórház</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="leadApronCheck" checked>
-                            Ólomkötény használata képalkotónál
-                        </label>
-                    </div>
-
-                    <div id="injurySlotsContainer" class="injury-slots-container">
-                        <!-- Első slot dinamikusan generálódik JS-ből -->
-                    </div>
-                    <button class="btn-add-injury" onclick="addInjurySlot()">+ Sérülés hozzáadása</button>
-
-                    <div id="warningBox" class="warning hidden"></div>
-
-                    <button class="btn-generate" onclick="generateRP()">Generálás</button>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h2>Gyors beavatkozások</h2>
-                    <div class="procedures-grid">
-                        <button class="btn-procedure" onclick="generateProcedure('venabiztositas')">Vénabiztosítás</button>
-                        <button class="btn-procedure" onclick="generateProcedure('vernyomas_meres')">Vérnyomás mérés</button>
-                        <button class="btn-procedure" onclick="generateProcedure('pulzoxy_meres')">Pulzoxy mérés</button>
-                        <button class="btn-procedure" onclick="generateProcedure('vercukor_meres')">Vércukor mérés</button>
-                        <button class="btn-procedure" onclick="generateProcedure('ekg')">EKG készítés</button>
-                        <button class="btn-procedure" onclick="generateProcedure('rontgen')">Röntgenezés</button>
-                        <button class="btn-procedure" onclick="generateProcedure('gipszeles')">Gipszelés</button>
-                        <button class="btn-procedure" onclick="generateProcedure('helyszini_gipszeles')">Helyszíni gipszelés</button>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h2>Beszúrások</h2>
-                    <div class="procedures-grid">
-                        <button class="btn-procedure" onclick="generateInjection('algopyrin')">Algopyrin (fájdalomcs.)</button>
-                        <button class="btn-procedure" onclick="generateInjection('morphine')">Morphine (erős fájd.cs.)</button>
-                        <button class="btn-procedure" onclick="generateInjection('lidocain')">Lidocain (érzéstelenítő)</button>
-                        <button class="btn-procedure" onclick="generateInjection('exacyl')">Exacyl (véralvadás)</button>
-                        <button class="btn-procedure" onclick="generateInjection('arterenol')">Arterenol (vérnyomás)</button>
-                        <button class="btn-procedure" onclick="generateInjection('tonogen')">Tonogen (adrenalin)</button>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h2>Infúzió / Vérpótlás</h2>
-                    <div class="procedures-grid">
-                        <button class="btn-procedure" onclick="generateInfusion('isolitye')">Isolitye infúzió</button>
-                        <button class="btn-procedure" onclick="generateInfusion('ringer')">Ringer-laktát</button>
-                        <button class="btn-procedure" onclick="generateInfusion('nacl')">NaCl 0.9%</button>
-                        <button class="btn-procedure" onclick="generateInfusion('verpotlas')">Vérpótlás</button>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h2>Anim (eszméletlen beteg)</h2>
-                    <div class="procedures-grid">
-                        <button class="btn-procedure" onclick="generateAnim()">Sóoldatos infúzió bekötése</button>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h2>Vérzés stabilizálás</h2>
-                    <div class="procedures-grid">
-                        <button class="btn-procedure" onclick="generateBleedingStab()">Vérzéscsillapítás + stabilizálás</button>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <div class="medications-list">
-                        <div class="collapsible-header" onclick="toggleMedications()">
-                            <h3>Gyógyszerek referencia</h3>
-                        </div>
-                        <div class="collapsible-content" id="medicationsContent">
-                            <div class="med-item"><span class="med-name">Algopyrin</span><span class="med-info">Fájdalomcsillapító - 500-1500mg</span></div>
-                            <div class="med-item"><span class="med-name">Flector gél</span><span class="med-info">Gyulladáscsökkentő - helyi</span></div>
-                            <div class="med-item"><span class="med-name">Jégzselé</span><span class="med-info">Fájdalomcsillapító, hűsítő</span></div>
-                            <div class="med-item"><span class="med-name">Lidocain</span><span class="med-info">Helyi érzéstelenítő - 1-3ml</span></div>
-                            <div class="med-item"><span class="med-name">Morphine</span><span class="med-info">Kábító fájdalomcsillapító - 5-10mg</span></div>
-                            <div class="med-item"><span class="med-name">Exacyl</span><span class="med-info">Véralvadást segítő - 500-1000mg</span></div>
-                            <div class="med-item"><span class="med-name">Arterenol</span><span class="med-info">Pulzus emelése - 0.5-1mg</span></div>
-                            <div class="med-item"><span class="med-name">Tonogen</span><span class="med-info">Pulzus emelése - 0.3-0.5mg</span></div>
-                            <div class="med-item"><span class="med-name">No-Spa</span><span class="med-info">Görcsoldó - 40-80mg</span></div>
-                            <div class="med-item"><span class="med-name">Midozolam</span><span class="med-info">Szedálás - 2-5mg</span></div>
-                            <div class="med-item"><span class="med-name">Isolitye</span><span class="med-info">Infúziós folyadék - 500ml</span></div>
-                            <div class="med-item"><span class="med-name">Glucagen</span><span class="med-info">Alacsony vércukor - 1mg</span></div>
-                        </div>
-                    </div>
+    <div class="app-wrapper">
+        <!-- TOP NAVBAR -->
+        <nav class="top-navbar">
+            <button class="hamburger" onclick="toggleSidebar()" aria-label="Menü">☰</button>
+            <div class="navbar-logo">
+                <img src="Insignia_Hungary_OMSZ_v1.svg.png" alt="OMSZ Logo" class="navbar-logo-img">
+                <div>
+                    <div class="navbar-title">SeeOMSZ</div>
+                    <div class="navbar-subtitle">V4 RP Generátor</div>
                 </div>
             </div>
+            <div class="navbar-right"></div>
+        </nav>
 
-            <div class="right-panel">
-                <div class="card">
+        <!-- OVERLAY (mobil) -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+        <div class="app-body">
+            <!-- SIDEBAR -->
+            <aside class="sidebar" id="sidebar">
+                <div class="sidebar-nav">
+
+                    <!-- 1. RP Generátor (alapból nyitva) -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header active" onclick="toggleSection(this)">
+                            <span class="section-icon">🏥</span>
+                            <span class="section-label">RP Generátor</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content open">
+                            <div class="section-inner">
+                                <div class="form-group">
+                                    <label>Beteg neve (opcionális)</label>
+                                    <input type="text" id="patientName" placeholder="pl. Kiss János" style="width:100%;padding:12px;border:2px solid var(--border);border-radius:8px;background:var(--bg-secondary);color:var(--text-primary);font-size:1rem;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Súlyosság</label>
+                                    <div class="button-group" id="severityGroup">
+                                        <button class="btn-option active" data-value="enyhe">Enyhe</button>
+                                        <button class="btn-option" data-value="kozepes">Közepes</button>
+                                        <button class="btn-option" data-value="sulyos">Súlyos</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Helyszín</label>
+                                    <div class="button-group" id="locationGroup">
+                                        <button class="btn-option active" data-value="helyszin">Helyszín</button>
+                                        <button class="btn-option" data-value="korhaz">Kórház</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="leadApronCheck" checked>
+                                        Ólomkötény képalkotónál
+                                    </label>
+                                </div>
+                                <div id="injurySlotsContainer" class="injury-slots-container"></div>
+                                <button class="btn-add-injury" onclick="addInjurySlot()">+ Sérülés hozzáadása</button>
+                                <div id="warningBox" class="warning hidden"></div>
+                                <button class="btn-generate" onclick="generateRP()">Generálás</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Beavatkozások -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header" onclick="toggleSection(this)">
+                            <span class="section-icon">🔧</span>
+                            <span class="section-label">Beavatkozások</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content">
+                            <div class="section-inner">
+                                <div class="procedures-grid">
+                                    <button class="btn-procedure" onclick="generateProcedure('venabiztositas')">Vénabiztosítás</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('vernyomas_meres')">Vérnyomás mérés</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('pulzoxy_meres')">Pulzoxy mérés</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('vercukor_meres')">Vércukor mérés</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('ekg')">EKG készítés</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('rontgen')">Röntgenezés</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('gipszeles')">Gipszelés</button>
+                                    <button class="btn-procedure" onclick="generateProcedure('helyszini_gipszeles')">Helyszíni gipszelés</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Injekciók -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header" onclick="toggleSection(this)">
+                            <span class="section-icon">💉</span>
+                            <span class="section-label">Injekciók</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content">
+                            <div class="section-inner">
+                                <div class="procedures-grid">
+                                    <button class="btn-procedure" onclick="generateInjection('algopyrin')">Algopyrin</button>
+                                    <button class="btn-procedure" onclick="generateInjection('morphine')">Morphine</button>
+                                    <button class="btn-procedure" onclick="generateInjection('lidocain')">Lidocain</button>
+                                    <button class="btn-procedure" onclick="generateInjection('exacyl')">Exacyl</button>
+                                    <button class="btn-procedure" onclick="generateInjection('arterenol')">Arterenol</button>
+                                    <button class="btn-procedure" onclick="generateInjection('tonogen')">Tonogen</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Infúziók -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header" onclick="toggleSection(this)">
+                            <span class="section-icon">🩸</span>
+                            <span class="section-label">Infúziók</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content">
+                            <div class="section-inner">
+                                <div class="procedures-grid">
+                                    <button class="btn-procedure" onclick="generateInfusion('isolitye')">Isolitye infúzió</button>
+                                    <button class="btn-procedure" onclick="generateInfusion('ringer')">Ringer-laktát</button>
+                                    <button class="btn-procedure" onclick="generateInfusion('nacl')">NaCl 0.9%</button>
+                                    <button class="btn-procedure" onclick="generateInfusion('verpotlas')">Vérpótlás</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Speciális -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header" onclick="toggleSection(this)">
+                            <span class="section-icon">⚡</span>
+                            <span class="section-label">Speciális</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content">
+                            <div class="section-inner">
+                                <div class="procedures-grid">
+                                    <button class="btn-procedure" onclick="generateAnim()">Sóoldatos infúzió (Anim)</button>
+                                    <button class="btn-procedure" onclick="generateBleedingStab()">Vérzéscsillapítás</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Gyógyszerek -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header" onclick="toggleSection(this)">
+                            <span class="section-icon">💊</span>
+                            <span class="section-label">Gyógyszerek</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content">
+                            <div class="section-inner">
+                                <div class="med-item"><span class="med-name">Algopyrin</span><span class="med-info">Fájdalomcs. - 500-1500mg</span></div>
+                                <div class="med-item"><span class="med-name">Flector gél</span><span class="med-info">Gyulladáscs. - helyi</span></div>
+                                <div class="med-item"><span class="med-name">Jégzselé</span><span class="med-info">Fájdalomcs., hűsítő</span></div>
+                                <div class="med-item"><span class="med-name">Lidocain</span><span class="med-info">Érzéstelenítő - 1-3ml</span></div>
+                                <div class="med-item"><span class="med-name">Morphine</span><span class="med-info">Kábító fájdalomcs. - 5-10mg</span></div>
+                                <div class="med-item"><span class="med-name">Exacyl</span><span class="med-info">Véralvadás - 500-1000mg</span></div>
+                                <div class="med-item"><span class="med-name">Arterenol</span><span class="med-info">Pulzus emelése - 0.5-1mg</span></div>
+                                <div class="med-item"><span class="med-name">Tonogen</span><span class="med-info">Pulzus emelése - 0.3-0.5mg</span></div>
+                                <div class="med-item"><span class="med-name">No-Spa</span><span class="med-info">Görcsoldó - 40-80mg</span></div>
+                                <div class="med-item"><span class="med-name">Midozolam</span><span class="med-info">Szedálás - 2-5mg</span></div>
+                                <div class="med-item"><span class="med-name">Isolitye</span><span class="med-info">Infúziós folyadék - 500ml</span></div>
+                                <div class="med-item"><span class="med-name">Glucagen</span><span class="med-info">Alacsony vércukor - 1mg</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Sablonok (Kedvencek) -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-header" onclick="toggleSection(this)">
+                            <span class="section-icon">⭐</span>
+                            <span class="section-label">Sablonok</span>
+                            <span class="section-arrow">▶</span>
+                        </div>
+                        <div class="sidebar-section-content">
+                            <div class="section-inner">
+                                <div id="favoritesList"></div>
+                                <button class="btn-save-favorite" onclick="saveFavorite()">+ Jelenlegi beállítás mentése</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT (output) -->
+            <main class="main-content">
+                <div class="card output-card">
                     <div class="output-header">
                         <h2>Generált szöveg</h2>
                         <div style="display:flex;gap:8px;">
@@ -1195,7 +1306,7 @@
                         <div class="placeholder">Válassz sérülés típust és kattints a "Generálás" gombra</div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 
@@ -3014,6 +3125,20 @@
             header.classList.toggle('collapsed');
         }
 
+        // ==================== SIDEBAR TOGGLE ====================
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('visible');
+        }
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('open');
+            header.classList.toggle('active');
+        }
+
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
             setupButtonGroups();
@@ -3022,12 +3147,5 @@
         });
     </script>
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <img src="gyorfipal.jpg" alt="Győrfi Pál" class="footer-portrait">
-            <p class="footer-text">„Vigyázzatok magatokra, vigyázzatok egymásra!"</p>
-            <p class="footer-name">- Győrfi Pál, OMSZ szóvivő</p>
-        </div>
-    </footer>
 </body>
 </html>
