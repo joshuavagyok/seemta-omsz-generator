@@ -24,6 +24,15 @@
             --glass-bg-hover: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            /* Téma változók */
+            --navbar-bg: rgba(10, 9, 26, 0.97);
+            --output-card-bg: rgba(255, 255, 255, 0.05);
+            --output-card-border: rgba(255, 255, 255, 0.1);
+            --output-line-bg: rgba(255, 255, 255, 0.03);
+            --output-line-border-subtle: rgba(255, 255, 255, 0.05);
+            --rp-text-color: #f0f0f0;
+            --btn-output-bg: rgba(255, 255, 255, 0.03);
+            --placeholder-color: #b0b0b0;
         }
 
         * {
@@ -157,7 +166,7 @@
         .top-navbar {
             height: 52px;
             flex-shrink: 0;
-            background: rgba(10, 9, 26, 0.97);
+            background: var(--navbar-bg);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
@@ -360,12 +369,12 @@
 
         /* ========== GLASSMORPHISM KÁRTYÁK ========== */
         .card {
-            background: var(--glass-bg);
+            background: var(--output-card-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
             padding: 22px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--output-card-border);
             box-shadow: var(--glass-shadow);
             transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -535,7 +544,7 @@
 
         .btn-copy-all {
             padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--btn-output-bg);
             border: 1px solid rgba(233, 69, 96, 0.4);
             color: var(--accent);
             border-radius: 8px;
@@ -558,7 +567,7 @@
         }
 
         .generated-line {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--output-line-bg);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-left: 3px solid var(--accent);
@@ -570,9 +579,9 @@
             align-items: center;
             gap: 10px;
             transition: background 0.3s ease, box-shadow 0.3s ease;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid var(--output-line-border-subtle);
+            border-right: 1px solid var(--output-line-border-subtle);
+            border-bottom: 1px solid var(--output-line-border-subtle);
         }
 
         .generated-line:hover {
@@ -603,6 +612,7 @@
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 0.95rem;
             word-break: break-word;
+            color: var(--rp-text-color);
         }
 
         .btn-copy {
@@ -631,7 +641,7 @@
         }
 
         .placeholder {
-            color: var(--text-secondary);
+            color: var(--placeholder-color);
             text-align: center;
             padding: 40px;
             font-style: italic;
@@ -711,7 +721,7 @@
         }
 
         .rp-current-line {
-            background: rgba(255, 255, 255, 0.04);
+            background: var(--output-line-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(74, 222, 128, 0.3);
@@ -751,7 +761,7 @@
 
         .btn-rp-prev {
             padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--btn-output-bg);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-secondary);
             border-radius: 10px;
@@ -1102,6 +1112,62 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(233, 69, 96, 0.5);
         }
+
+        /* ========== TÉMA TOGGLE GOMB ========== */
+        .btn-theme-toggle {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            border-radius: 8px;
+            padding: 6px 11px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+            min-height: 36px;
+            flex-shrink: 0;
+        }
+
+        .btn-theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ========== VILÁGOS TÉMA ========== */
+        [data-theme="light"] {
+            --navbar-bg: #2980b9;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --output-card-bg: #ffffff;
+            --output-card-border: rgba(0, 0, 0, 0.08);
+            --output-line-bg: #ffffff;
+            --output-line-border-subtle: rgba(0, 0, 0, 0.06);
+            --rp-text-color: #1a1a2e;
+            --glass-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            --btn-output-bg: rgba(0, 0, 0, 0.03);
+            --placeholder-color: #7a7a9a;
+            --accent-glow: rgba(233, 69, 96, 0.25);
+        }
+
+        html[data-theme="light"] body {
+            background: #f4f6f9;
+            animation: none;
+        }
+
+        html[data-theme="light"] body::before,
+        html[data-theme="light"] body::after {
+            display: none !important;
+        }
+
+        [data-theme="light"] .generated-line:hover {
+            background: #f8f9fb;
+        }
+
+        [data-theme="light"] .card h2 {
+            text-shadow: none;
+        }
+
+        [data-theme="light"] .output-header h2 {
+            text-shadow: none;
+        }
     </style>
 </head>
 <body>
@@ -1116,7 +1182,9 @@
                     <div class="navbar-subtitle">V4 RP Generátor</div>
                 </div>
             </div>
-            <div class="navbar-right"></div>
+            <div class="navbar-right">
+                <button class="btn-theme-toggle" onclick="toggleTheme()" id="themeToggle" title="Téma váltás">🌙</button>
+            </div>
         </nav>
 
         <!-- OVERLAY (mobil) -->
@@ -3139,8 +3207,23 @@
             header.classList.toggle('active');
         }
 
+        // ==================== TÉMA TOGGLE ====================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isLight = html.getAttribute('data-theme') === 'light';
+            const newTheme = isLight ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            document.getElementById('themeToggle').textContent = newTheme === 'light' ? '☀️' : '🌙';
+            localStorage.setItem('theme', newTheme);
+        }
+
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
+            // Mentett téma alkalmazása
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeToggle').textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
             setupButtonGroups();
             addInjurySlot();
             renderFavorites();
