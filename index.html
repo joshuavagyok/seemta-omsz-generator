@@ -41,63 +41,9 @@
             box-sizing: border-box;
         }
 
-        /* Animált gradiens háttér */
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(15px, -25px) scale(1.02); }
-            66% { transform: translate(-10px, 10px) scale(0.98); }
-        }
-
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, 15px) scale(1.03); }
-            66% { transform: translate(12px, -20px) scale(0.97); }
-        }
-
-        @keyframes fadeBlurIn {
-            from {
-                opacity: 0;
-                filter: blur(10px);
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                filter: blur(0);
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { filter: drop-shadow(0 0 8px var(--accent-glow)); }
-            50% { filter: drop-shadow(0 0 20px var(--accent-glow)) drop-shadow(0 0 40px rgba(233, 69, 96, 0.2)); }
-        }
-
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                filter: blur(8px);
-                transform: translateX(-15px);
-            }
-            to {
-                opacity: 1;
-                filter: blur(0);
-                transform: translateX(0);
-            }
-        }
-
-        /* Reduced motion támogatás */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+            from { opacity: 0; transform: translateX(-8px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         html {
@@ -110,9 +56,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a3e, #0f0c29);
-            background-size: 400% 400%;
-            animation: gradientShift 45s ease infinite;
+            background: #0f0c29;
             color: var(--text-primary);
             min-height: 100vh;
             padding: 0;
@@ -124,34 +68,6 @@
             touch-action: manipulation;
         }
 
-        /* Lebegő dekoratív körök - csak desktopon */
-        body::before,
-        body::after {
-            content: '';
-            position: fixed;
-            border-radius: 50%;
-            z-index: 0;
-            pointer-events: none;
-            display: none;
-        }
-
-        body::before {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(233, 69, 96, 0.08) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-            animation: float1 30s ease-in-out infinite;
-        }
-
-        body::after {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(74, 222, 128, 0.06) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
-            animation: float2 35s ease-in-out infinite;
-        }
 
         /* ========== APP WRAPPER + NAVBAR ========== */
         .app-wrapper {
@@ -206,7 +122,6 @@
             height: 30px;
             object-fit: contain;
             filter: drop-shadow(0 0 6px var(--accent-glow));
-            animation: pulseGlow 3s ease-in-out infinite;
         }
 
         .navbar-title {
@@ -328,9 +243,6 @@
         /* ========== MOBIL (<= 900px) ========== */
         @media (max-width: 900px) {
             body {
-                animation: none;
-                background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
-                background-size: 100% 100%;
             }
             .sidebar {
                 position: fixed;
@@ -344,18 +256,10 @@
                 transform: translateX(0);
                 box-shadow: 4px 0 24px rgba(0, 0, 0, 0.6);
             }
-            .card, select, .btn-option,
-            .btn-procedure, .generated-line, .btn-generate,
-            .btn-rp-mode, .placeholder, .favorite-item,
-            .bullet-option, .btn-copy-all, #patientName {
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
         }
 
         /* ========== DESKTOP (901px+) ========== */
         @media (min-width: 901px) {
-            body::before, body::after { display: block; }
             .card:hover {
                 background: var(--glass-bg-hover);
                 border-color: rgba(255, 255, 255, 0.15);
@@ -370,8 +274,6 @@
         /* ========== GLASSMORPHISM KÁRTYÁK ========== */
         .card {
             background: var(--output-card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
             padding: 22px;
             border: 1px solid var(--output-card-border);
@@ -410,8 +312,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
             color: var(--text-primary);
             font-size: 1rem;
             cursor: pointer;
@@ -435,8 +336,7 @@
             border: 1px solid var(--glass-border) !important;
             border-radius: 10px !important;
             background: rgba(255, 255, 255, 0.03) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
+
             transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease !important;
         }
 
@@ -464,8 +364,7 @@
             transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
             font-size: 1rem;
             min-height: 44px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
         }
 
         .btn-option:hover {
@@ -551,8 +450,7 @@
             cursor: pointer;
             transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
         }
 
         .btn-copy-all:hover {
@@ -568,8 +466,7 @@
 
         .generated-line {
             background: var(--output-line-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
             border-left: 3px solid var(--accent);
             padding: 14px 12px;
             margin: 6px 0;
@@ -666,8 +563,7 @@
             font-size: 0.9rem;
             text-align: center;
             min-height: 44px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
         }
 
         .btn-procedure:hover {
@@ -698,8 +594,7 @@
             cursor: pointer;
             transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
         }
 
         .btn-rp-mode:hover {
@@ -722,8 +617,7 @@
 
         .rp-current-line {
             background: var(--output-line-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+
             border: 1px solid rgba(74, 222, 128, 0.3);
             border-radius: 16px;
             padding: 25px 20px;
@@ -796,8 +690,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 12px;
             padding: 14px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
             transition: background 0.3s ease, border-color 0.3s ease;
         }
 
@@ -915,8 +808,7 @@
             border-radius: 10px;
             margin-bottom: 15px;
             font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
             box-shadow: 0 0 10px rgba(251, 191, 36, 0.1);
         }
 
@@ -1149,12 +1041,6 @@
 
         html[data-theme="light"] body {
             background: #f4f6f9;
-            animation: none;
-        }
-
-        html[data-theme="light"] body::before,
-        html[data-theme="light"] body::after {
-            display: none !important;
         }
 
         [data-theme="light"] .generated-line:hover {
